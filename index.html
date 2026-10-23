@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonrisa Imperial | Clínica Dental</title>
+  <meta name="description" content="Sonrisa Imperial, clínica dental. Agenda tu cita de valoración en menos de un minuto.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">
+        <span class="logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 3.5c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 7.5.6 2 .8 5 2.3 5 1.4 0 1.5-2.5 2.2-4.3.4-1 .9-1.4 2.5-1.4s2.1.4 2.5 1.4c.7 1.8.8 4.3 2.2 4.3 1.5 0 1.7-3 2.3-5 .8-2.5 2-4.5 2-7.5 0-2.5-1.5-4.5-4-4.5-2 0-3 1-5 1s-3-1-5-1z"/>
+          </svg>
+        </span>
+        <span class="logo__text">Sonrisa <em>Imperial</em></span>
+      </a>
+      <a href="#agendar" class="btn btn--ghost">Agendar cita</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+
+        <div class="hero__copy">
+          <p class="eyebrow">Clínica dental</p>
+          <h1>Una sonrisa sana empieza con una buena conversación.</h1>
+          <p class="lead">
+            Agenda tu cita de valoración. Revisamos tu caso, resolvemos tus dudas
+            y te proponemos un plan claro, sin compromiso.
+          </p>
+
+          <ul class="points">
+            <li>
+              <span class="points__num">01</span>
+              <span>Diagnóstico completo en tu primera visita</span>
+            </li>
+            <li>
+              <span class="points__num">02</span>
+              <span>Presupuesto transparente antes de cualquier tratamiento</span>
+            </li>
+            <li>
+              <span class="points__num">03</span>
+              <span>Te confirmamos la cita en menos de 24 horas</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="agendar">
+          <form class="form" id="booking-form" novalidate>
+            <h2>Agenda tu cita</h2>
+            <p class="form__sub">Completa tus datos y envíanos la solicitud por WhatsApp.</p>
+
+            <div class="field">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="email">Correo</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="motivo">Motivo de la consulta</label>
+              <select id="motivo" name="motivo" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option>Valoración general</option>
+                <option>Limpieza dental</option>
+                <option>Blanqueamiento</option>
+                <option>Ortodoncia</option>
+                <option>Implantes</option>
+                <option>Dolor o urgencia</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="fecha">Fecha preferida</label>
+                <input type="date" id="fecha" name="fecha" required>
+              </div>
+              <div class="field">
+                <label for="horario">Horario</label>
+                <select id="horario" name="horario" required>
+                  <option value="" disabled selected>Elige</option>
+                  <option>Mañana (9:00 – 13:00)</option>
+                  <option>Tarde (13:00 – 17:00)</option>
+                  <option>Noche (17:00 – 20:00)</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="form__error" id="form-error" role="alert" hidden>
+              Revisa los campos marcados para continuar.
+            </p>
+
+            <button type="submit" class="btn btn--primary btn--block">Enviar por WhatsApp</button>
+            <p class="form__note">Tus datos solo se usan para contactarte sobre tu cita.</p>
+          </form>
+
+          <div class="success" id="booking-success" hidden>
+            <span class="success__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            </span>
+            <h2>¡Ya casi está!</h2>
+            <p id="success-text">Abrimos WhatsApp con tu solicitud: solo presiona enviar.</p>
+            <div class="success__actions">
+              <a href="#" class="btn btn--primary" id="whatsapp-link" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a>
+              <button type="button" class="btn btn--ghost" id="booking-reset">Agendar otra cita</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand">Sonrisa <em>Imperial</em></p>
+      <p>Villa María del Triunfo, Lima · Lun a Sáb, 9:00 – 20:00</p>
+      <p><a href="https://wa.me/51925659628" target="_blank" rel="noopener">WhatsApp +51 925 659 628</a> · <a href="mailto:lucahuantico@gmail.com">lucahuantico@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
