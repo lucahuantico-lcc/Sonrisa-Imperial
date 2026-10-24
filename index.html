@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonrisa Imperial | Clínica Dental</title>
-  <meta name="description" content="Sonrisa Imperial, clínica dental. Agenda tu cita de valoración en menos de un minuto.">
+  <title>Sonrisa Imperial | Clínica dental en Villa María del Triunfo, Lima</title>
+  <meta name="description" content="Sonrisa Imperial, clínica dental en Villa María del Triunfo, Lima. Marca el diente que te molesta y agenda tu cita de valoración por WhatsApp.">
+  <meta name="theme-color" content="#3b1f5c">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Young+Serif&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,50 +16,134 @@
   <header class="header">
     <div class="container header__inner">
       <a href="#" class="logo">
-        <span class="logo__mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 3.5c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 7.5.6 2 .8 5 2.3 5 1.4 0 1.5-2.5 2.2-4.3.4-1 .9-1.4 2.5-1.4s2.1.4 2.5 1.4c.7 1.8.8 4.3 2.2 4.3 1.5 0 1.7-3 2.3-5 .8-2.5 2-4.5 2-7.5 0-2.5-1.5-4.5-4-4.5-2 0-3 1-5 1s-3-1-5-1z"/>
-          </svg>
-        </span>
-        <span class="logo__text">Sonrisa <em>Imperial</em></span>
+        <svg class="logo__mark" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path d="M7 3.5c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 7.5.6 2 .8 5 2.3 5 1.4 0 1.5-2.5 2.2-4.3.4-1 .9-1.4 2.5-1.4s2.1.4 2.5 1.4c.7 1.8.8 4.3 2.2 4.3 1.5 0 1.7-3 2.3-5 .8-2.5 2-4.5 2-7.5 0-2.5-1.5-4.5-4-4.5-2 0-3 1-5 1s-3-1-5-1z"/>
+        </svg>
+        <span class="logo__text">Sonrisa Imperial</span>
       </a>
-      <a href="#agendar" class="btn btn--ghost">Agendar cita</a>
+      <a href="#agendar" class="btn btn--outline">Agendar cita</a>
     </div>
   </header>
 
   <main>
+    <!-- Hero: el odontograma es el elemento protagonista -->
     <section class="hero">
       <div class="container hero__grid">
-
         <div class="hero__copy">
-          <p class="eyebrow">Clínica dental · Lima</p>
-          <h1>Una sonrisa sana empieza con una buena conversación.</h1>
+          <h1>Señálanos el diente. Del resto nos encargamos.</h1>
           <p class="lead">
-            Agenda tu cita de valoración. Revisamos tu caso, resolvemos tus dudas
-            y te proponemos un plan claro, sin compromiso.
+            Somos una clínica dental en Villa María del Triunfo. En tu primera visita
+            revisamos tu boca completa y te explicamos qué necesitas y cuánto cuesta,
+            antes de empezar cualquier tratamiento.
           </p>
-
-          <ul class="points">
-            <li>
-              <span class="points__num">01</span>
-              <span>Diagnóstico completo en tu primera visita</span>
-            </li>
-            <li>
-              <span class="points__num">02</span>
-              <span>Presupuesto transparente antes de cualquier tratamiento</span>
-            </li>
-            <li>
-              <span class="points__num">03</span>
-              <span>Te confirmamos la cita en menos de 24 horas</span>
-            </li>
-          </ul>
+          <a href="#agendar" class="btn btn--primary">Agendar mi cita</a>
         </div>
 
-        <div class="card" id="agendar">
-          <form class="form" id="booking-form" novalidate>
-            <h2>Agenda tu cita</h2>
-            <p class="form__sub">Completa tus datos y envíanos la solicitud por WhatsApp.</p>
+        <div class="chart">
+          <p class="chart__prompt" id="chart-prompt">¿Te molesta algún diente? Tócalo.</p>
+          <div class="chart__mouth">
+            <span class="chart__side chart__side--left">Tu lado izquierdo</span>
+            <svg class="chart__svg" id="odontograma" viewBox="0 0 320 440" role="group" aria-labelledby="chart-prompt"></svg>
+            <span class="chart__side chart__side--right">Tu lado derecho</span>
+          </div>
+          <div class="chart__picked" id="chart-picked" aria-live="polite">
+            <p class="chart__empty">No has marcado ninguno. También puedes agendar sin marcar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section class="section visit">
+      <div class="container">
+        <h2>Así es tu primera visita</h2>
+        <ol class="steps">
+          <li>
+            <h3>Nos escribes</h3>
+            <p>Llenas el formulario de esta página o nos escribes directo por WhatsApp.</p>
+          </li>
+          <li>
+            <h3>Confirmamos tu cita</h3>
+            <p>Te respondemos por WhatsApp en menos de 24 horas con el día y la hora.</p>
+          </li>
+          <li>
+            <h3>Revisamos tu boca completa</h3>
+            <p>No solo el diente que te molesta: vemos todo para que no haya sorpresas después.</p>
+          </li>
+          <li>
+            <h3>Te explicamos el plan y el precio</h3>
+            <p>Sabes cuánto cuesta antes de empezar. Decides con calma, sin compromiso.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section treatments">
+      <div class="container">
+        <h2>Qué podemos hacer por ti</h2>
+        <ul class="treatments__list">
+          <li>
+            <a href="#agendar" data-motivo="Dolor o urgencia">
+              <h3>Dolor o urgencia</h3>
+              <p>Si te duele hoy, escríbenos. Buscamos el espacio más cercano para atenderte.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#agendar" data-motivo="Limpieza dental">
+              <h3>Limpieza dental</h3>
+              <p>Quitamos el sarro y la placa que el cepillo no alcanza. Se recomienda cada seis meses.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#agendar" data-motivo="Ortodoncia">
+              <h3>Ortodoncia</h3>
+              <p>Brackets para alinear los dientes y corregir la mordida, en niños y adultos.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#agendar" data-motivo="Implantes">
+              <h3>Implantes</h3>
+              <p>Reemplazamos un diente perdido con una pieza fija que se ve y se siente natural.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#agendar" data-motivo="Blanqueamiento">
+              <h3>Blanqueamiento</h3>
+              <p>Aclaramos el tono de tus dientes de forma segura, después de revisar que estén sanos.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#agendar" data-motivo="Valoración general">
+              <h3>No sé qué necesito</h3>
+              <p>Agenda una valoración. Te revisamos y te decimos qué tratamiento te conviene.</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section booking" id="agendar">
+      <div class="container booking__grid">
+        <div class="booking__info">
+          <h2>Agenda tu cita</h2>
+          <p>Completa tus datos y te llevamos a WhatsApp con el mensaje listo. Solo tienes que enviarlo.</p>
+          <dl class="facts">
+            <div>
+              <dt>Dónde estamos</dt>
+              <dd>Villa María del Triunfo, Lima</dd>
+            </div>
+            <div>
+              <dt>Horario</dt>
+              <dd>Lunes a sábado, de 9:00 a 20:00</dd>
+            </div>
+            <div>
+              <dt>WhatsApp</dt>
+              <dd><a href="https://wa.me/51925659628" target="_blank" rel="noopener">+51 925 659 628</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="panel">
+          <form class="form" id="booking-form" novalidate>
             <div class="field">
               <label for="nombre">Nombre completo</label>
               <input type="text" id="nombre" name="nombre" autocomplete="name" required>
@@ -67,7 +152,7 @@
             <div class="field-row">
               <div class="field">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+                <input type="tel" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" required>
               </div>
               <div class="field">
                 <label for="email">Correo</label>
@@ -89,6 +174,11 @@
               </select>
             </div>
 
+            <p class="form__teeth" id="form-teeth" hidden>
+              <span id="form-teeth-text"></span>
+              <a href="#odontograma" class="form__teeth-edit">Cambiar</a>
+            </p>
+
             <div class="field-row">
               <div class="field">
                 <label for="fecha">Fecha preferida</label>
@@ -106,7 +196,7 @@
             </div>
 
             <p class="form__error" id="form-error" role="alert" hidden>
-              Revisa los campos marcados para continuar.
+              Faltan datos. Completa los campos marcados en rojo.
             </p>
 
             <button type="submit" class="btn btn--primary btn--block">Enviar por WhatsApp</button>
@@ -114,27 +204,26 @@
           </form>
 
           <div class="success" id="booking-success" hidden>
-            <span class="success__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-            </span>
-            <h2>¡Ya casi está!</h2>
-            <p id="success-text">Abrimos WhatsApp con tu solicitud: solo presiona enviar.</p>
+            <h2>Tu mensaje está listo</h2>
+            <p id="success-text">Abrimos WhatsApp con tu solicitud. Solo presiona enviar.</p>
             <div class="success__actions">
               <a href="#" class="btn btn--primary" id="whatsapp-link" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a>
-              <button type="button" class="btn btn--ghost" id="booking-reset">Agendar otra cita</button>
+              <button type="button" class="btn btn--outline" id="booking-reset">Agendar otra cita</button>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p class="footer__brand">Sonrisa <em>Imperial</em></p>
-      <p>Villa María del Triunfo, Lima · Lun a Sáb, 9:00 – 20:00</p>
-      <p><a href="https://wa.me/51925659628" target="_blank" rel="noopener">WhatsApp +51 925 659 628</a> · <a href="mailto:lucahuantico@gmail.com">lucahuantico@gmail.com</a></p>
+      <p class="footer__brand">Sonrisa Imperial</p>
+      <p>Clínica dental en Villa María del Triunfo, Lima</p>
+      <p>
+        <a href="https://wa.me/51925659628" target="_blank" rel="noopener">WhatsApp +51 925 659 628</a><br>
+        <a href="mailto:lucahuantico@gmail.com">lucahuantico@gmail.com</a>
+      </p>
     </div>
   </footer>
 
