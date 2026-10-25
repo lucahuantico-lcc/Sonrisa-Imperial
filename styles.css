@@ -1,15 +1,18 @@
 /* ---------- Variables ---------- */
 :root {
-  --morado: #3b1f5c;
-  --morado-hover: #52307d;
-  --menta: #d5f0e4;
-  --menta-borde: #a9d9c4;
-  --esmalte: #fafbf9;
-  --encia: #f2a7b5;
+  --morado: #2b1150;
+  --morado-hover: #44207a;
+  --lila: #f1ebf8;
+  --lila-borde: #d8cbea;
+  --lila-texto: #d9cdeb;
+  --esmalte: #fbfafd;
+  --orquidea: #c92f78;
+  --orquidea-hover: #a8215f;
+  --orquidea-clara: #f39cc4;
   --blanco: #ffffff;
-  --texto: #26212e;
-  --gris: #5f5869;
-  --borde: #d3dcd7;
+  --texto: #221a2e;
+  --gris: #5e566b;
+  --borde: #e2dcea;
   --error: #b3261e;
   --display: "Young Serif", Georgia, serif;
   --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -120,6 +123,15 @@ a {
   color: var(--blanco);
 }
 
+.btn--accent {
+  background: var(--orquidea);
+  color: var(--blanco);
+}
+
+.btn--accent:hover {
+  background: var(--orquidea-hover);
+}
+
 .btn--block {
   width: 100%;
 }
@@ -129,9 +141,8 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(250, 251, 249, 0.94);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--borde);
+  background: var(--morado);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header__inner {
@@ -146,12 +157,12 @@ a {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--morado);
+  color: var(--blanco);
 }
 
 .logo__mark {
-  fill: var(--encia);
-  stroke: var(--morado);
+  fill: var(--orquidea);
+  stroke: var(--blanco);
   stroke-width: 1.4;
   stroke-linejoin: round;
 }
@@ -164,11 +175,29 @@ a {
 .header .btn {
   padding: 10px 18px;
   font-size: 0.95rem;
+  color: var(--blanco);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.header .btn:hover {
+  background: var(--blanco);
+  border-color: var(--blanco);
+  color: var(--morado);
+}
+
+.header :focus-visible,
+.hero__copy :focus-visible {
+  outline-color: var(--blanco);
 }
 
 /* ---------- Hero ---------- */
 .hero {
   padding: 72px 0 96px;
+  background: var(--morado);
+}
+
+.hero__copy h1 {
+  color: var(--blanco);
 }
 
 .hero__grid {
@@ -187,13 +216,13 @@ a {
   max-width: 34rem;
   margin-bottom: 36px;
   font-size: 1.15rem;
-  color: var(--gris);
+  color: var(--lila-texto);
 }
 
 /* ---------- Odontograma ---------- */
 .chart {
   background: var(--blanco);
-  border: 1px solid var(--menta-borde);
+  border: 1px solid var(--lila-borde);
   border-radius: 28px;
   padding: 28px 28px 24px;
 }
@@ -252,17 +281,17 @@ a {
 
 .tooth rect {
   fill: var(--blanco);
-  stroke: #9fb7ab;
+  stroke: #b9a8d3;
   stroke-width: 1.5;
   transition: fill 0.15s, stroke 0.15s;
 }
 
 .tooth:hover rect {
-  fill: var(--menta);
+  fill: var(--lila);
 }
 
 .tooth[aria-pressed="true"] rect {
-  fill: var(--encia);
+  fill: var(--orquidea);
   stroke: var(--morado);
   stroke-width: 2;
 }
@@ -275,7 +304,7 @@ a {
 .chart__picked {
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid var(--menta);
+  border-top: 1px solid var(--lila);
   font-size: 0.95rem;
   min-height: 3.5em;
 }
@@ -304,7 +333,7 @@ a {
   width: 10px;
   height: 10px;
   border-radius: 3px;
-  background: var(--encia);
+  background: var(--orquidea);
   border: 1.5px solid var(--morado);
   transform: translateY(1px);
 }
@@ -348,7 +377,7 @@ a {
 .steps li {
   counter-increment: paso;
   padding-top: 20px;
-  border-top: 3px solid var(--menta-borde);
+  border-top: 3px solid var(--lila-borde);
 }
 
 .steps li::before {
@@ -357,7 +386,7 @@ a {
   font-family: var(--display);
   font-size: 2.75rem;
   line-height: 1;
-  color: var(--morado);
+  color: var(--orquidea);
   margin-bottom: 16px;
 }
 
@@ -393,7 +422,7 @@ a {
 
 .treatments__list a:hover h3 {
   text-decoration: underline;
-  text-decoration-color: var(--encia);
+  text-decoration-color: var(--orquidea);
   text-decoration-thickness: 3px;
   text-underline-offset: 5px;
 }
@@ -423,7 +452,7 @@ a {
 
 .booking__info > p {
   max-width: 28rem;
-  color: #e4dcef;
+  color: var(--lila-texto);
   font-size: 1.1rem;
 }
 
@@ -436,7 +465,7 @@ a {
 .facts dt {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--menta);
+  color: var(--orquidea-clara);
 }
 
 .facts dd {
@@ -450,7 +479,7 @@ a {
 }
 
 .booking :focus-visible {
-  outline-color: var(--menta);
+  outline-color: var(--lila);
 }
 
 .panel {
@@ -510,7 +539,7 @@ select {
 input:focus,
 select:focus {
   border-color: var(--morado);
-  box-shadow: 0 0 0 3px var(--menta);
+  box-shadow: 0 0 0 3px var(--lila);
 }
 
 .panel input:focus-visible,
@@ -531,7 +560,7 @@ select:focus {
   margin: -4px 0 18px;
   padding: 12px 14px;
   border-radius: 10px;
-  background: var(--menta);
+  background: var(--lila);
   font-size: 0.95rem;
 }
 
