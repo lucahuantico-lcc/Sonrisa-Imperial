@@ -44,6 +44,12 @@
         </svg>
         <span class="logo__text">Sonrisa Imperial</span>
       </a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#doctora">La doctora</a>
+        <a href="#tratamientos">Tratamientos</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#ubicacion">Ubicación</a>
+      </nav>
       <a href="#agendar" class="btn btn--outline">Agendar cita</a>
     </div>
   </header>
@@ -60,6 +66,11 @@
             antes de empezar cualquier tratamiento.
           </p>
           <a href="#agendar" class="btn btn--accent">Agendar mi cita</a>
+          <!-- DEMO: doctora ficticia, reemplazar por la foto y el nombre reales -->
+          <a href="#doctora" class="hero__doctor">
+            <img src="https://images.unsplash.com/photo-1770134223774-13b735e29201?w=160&h=160&fit=crop&crop=faces" alt="" width="56" height="56">
+            <span>Te atiende la <strong>Dra. Camila Ríos</strong>, cirujana dentista con 12 años de experiencia</span>
+          </a>
         </div>
 
         <div class="chart">
@@ -72,6 +83,45 @@
           <div class="chart__picked" id="chart-picked" aria-live="polite">
             <p class="chart__empty">No has marcado ninguno. También puedes agendar sin marcar.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO: datos ficticios de la doctora, reemplazar por los reales -->
+    <section class="section doctor" id="doctora">
+      <div class="container doctor__grid">
+        <figure class="doctor__photo">
+          <img src="https://images.unsplash.com/photo-1770134223774-13b735e29201?w=900&h=1100&fit=crop&crop=faces" alt="Dra. Camila Ríos sonriendo, con uniforme azul" width="900" height="1100" loading="lazy">
+        </figure>
+        <div class="doctor__copy">
+          <h2>Hola, soy Camila</h2>
+          <p>
+            Crecí en Villa María del Triunfo y aquí abrí Sonrisa Imperial en 2014. Quería que
+            mis vecinos tuvieran un dentista de confianza cerca de casa, sin colas y sin cobros
+            que nadie entiende.
+          </p>
+          <p>
+            Muchos pacientes llegan con miedo por una mala experiencia. Por eso antes de tocar
+            un diente te explico qué voy a hacer, cuánto dura y cuánto cuesta. Si en algún
+            momento quieres parar, levantas la mano y paramos.
+          </p>
+          <blockquote class="doctor__quote">
+            Prefiero explicarte las cosas diez veces antes que hacerte algo que no entiendes.
+          </blockquote>
+          <dl class="doctor__facts">
+            <div>
+              <dt>Especialidad</dt>
+              <dd>Odontología general y estética</dd>
+            </div>
+            <div>
+              <dt>Atiende a</dt>
+              <dd>Niños, adultos y adultos mayores</dd>
+            </div>
+            <div>
+              <dt>Experiencia</dt>
+              <dd>12 años atendiendo a familias de Lima Sur</dd>
+            </div>
+          </dl>
         </div>
       </div>
     </section>
@@ -97,10 +147,26 @@
             <p>Sabes cuánto cuesta antes de empezar. Decides con calma, sin compromiso.</p>
           </li>
         </ol>
+
+        <!-- DEMO: fotos de Unsplash (licencia libre), reemplazar por fotos del local -->
+        <div class="gallery">
+          <figure class="gallery__main">
+            <img src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?w=1200&h=800&fit=crop" alt="Dentista conversando con una paciente sentada en el sillón dental" width="1200" height="800" loading="lazy">
+            <figcaption>Primero conversamos. El tratamiento empieza solo cuando estás de acuerdo.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&h=600&fit=crop" alt="Consultorio dental luminoso con sillón y equipos" width="800" height="600" loading="lazy">
+            <figcaption>Consultorio con equipos esterilizados en cada cita</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1681939283343-513b83b13c78?w=800&h=600&fit=crop" alt="Asistente dental con uniforme rosado preparando el sillón" width="800" height="600" loading="lazy">
+            <figcaption>Un equipo que te recibe por tu nombre</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
-    <section class="section treatments">
+    <section class="section treatments" id="tratamientos">
       <div class="container">
         <h2>Qué podemos hacer por ti</h2>
         <ul class="treatments__list">
@@ -144,6 +210,65 @@
       </div>
     </section>
 
+    <!-- DEMO: opiniones ficticias, reemplazar por reseñas reales de pacientes -->
+    <section class="section reviews" id="opiniones">
+      <div class="container">
+        <h2>Lo que dicen nuestros pacientes</h2>
+        <ul class="reviews__list">
+          <li>
+            <p class="reviews__stars" role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+            <blockquote>
+              <p>Le tenía pánico al dentista desde niña. La doctora me explicó todo antes de empezar y no sentí nada. Ahora voy cada seis meses.</p>
+            </blockquote>
+            <p class="reviews__who"><strong>Rosa M.</strong> Limpieza y curaciones, José Gálvez</p>
+          </li>
+          <li>
+            <p class="reviews__stars" role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+            <blockquote>
+              <p>Llevé a mis dos hijos para su primera revisión. Los atendieron con mucha paciencia y salieron contentos, hasta pidieron volver.</p>
+            </blockquote>
+            <p class="reviews__who"><strong>Jorge P.</strong> Odontopediatría, Tablada de Lurín</p>
+          </li>
+          <li>
+            <p class="reviews__stars" role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+            <blockquote>
+              <p>Me dieron el presupuesto por escrito desde el primer día y no hubo ningún cobro sorpresa. Terminé mi ortodoncia aquí.</p>
+            </blockquote>
+            <p class="reviews__who"><strong>Milagros C.</strong> Ortodoncia, Nueva Esperanza</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DEMO: precios y condiciones de ejemplo, confirmar con la clínica -->
+    <section class="section faq">
+      <div class="container faq__grid">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq__list">
+          <details>
+            <summary>¿Cuánto cuesta la primera consulta?</summary>
+            <p>La valoración cuesta S/ 30 e incluye la revisión de toda tu boca. Si empiezas tu tratamiento con nosotros, ese monto se descuenta.</p>
+          </details>
+          <details>
+            <summary>¿Duele?</summary>
+            <p>Usamos anestesia local en los tratamientos que lo necesitan, y antes te avisamos qué vas a sentir. Si algo te incomoda, paramos.</p>
+          </details>
+          <details>
+            <summary>¿Atienden a niños?</summary>
+            <p>Sí, desde los 3 años. La primera visita de un niño es corta y sirve para que conozca el consultorio sin presión.</p>
+          </details>
+          <details>
+            <summary>¿Puedo pagar en partes?</summary>
+            <p>Sí. La ortodoncia y los implantes se pueden pagar en cuotas mensuales sin intereses. Aceptamos Yape, Plin, efectivo y tarjetas.</p>
+          </details>
+          <details>
+            <summary>¿Atienden urgencias?</summary>
+            <p>Sí. Si tienes dolor fuerte o se te rompió un diente, escríbenos por WhatsApp y te buscamos un espacio el mismo día.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="section booking" id="agendar">
       <div class="container booking__grid">
         <div class="booking__info">
@@ -151,12 +276,8 @@
           <p>Completa tus datos y te llevamos a WhatsApp con el mensaje listo. Solo tienes que enviarlo.</p>
           <dl class="facts">
             <div>
-              <dt>Dónde estamos</dt>
-              <dd>Villa María del Triunfo, Lima</dd>
-            </div>
-            <div>
-              <dt>Horario</dt>
-              <dd>Lunes a sábado, de 9:00 a 20:00</dd>
+              <dt>Respuesta</dt>
+              <dd>En menos de 24 horas, por WhatsApp</dd>
             </div>
             <div>
               <dt>WhatsApp</dt>
@@ -237,6 +358,33 @@
         </div>
       </div>
     </section>
+
+    <!-- DEMO: dirección de ejemplo, el mapa muestra solo el distrito -->
+    <section class="section location" id="ubicacion">
+      <div class="container location__grid">
+        <div class="location__info">
+          <h2>Dónde estamos</h2>
+          <dl class="location__facts">
+            <div>
+              <dt>Dirección</dt>
+              <dd>Villa María del Triunfo, Lima. Te enviamos la ubicación exacta por WhatsApp cuando confirmamos tu cita.</dd>
+            </div>
+            <div>
+              <dt>Horario</dt>
+              <dd>Lunes a sábado, de 9:00 a 20:00<br>Domingos, solo urgencias</dd>
+            </div>
+            <div>
+              <dt>Formas de pago</dt>
+              <dd>Yape, Plin, efectivo y tarjetas de débito o crédito</dd>
+            </div>
+          </dl>
+          <a href="https://www.google.com/maps/search/?api=1&query=Villa+Mar%C3%ADa+del+Triunfo%2C+Lima" class="btn btn--outline" target="_blank" rel="noopener">Abrir en Google Maps</a>
+        </div>
+        <div class="location__map">
+          <iframe src="https://www.google.com/maps?q=Villa+Mar%C3%ADa+del+Triunfo,+Lima&z=14&output=embed" title="Mapa de Villa María del Triunfo, Lima" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -247,6 +395,7 @@
         <a href="https://wa.me/51925659628" target="_blank" rel="noopener">WhatsApp +51 925 659 628</a><br>
         <a href="mailto:lucahuantico@gmail.com">lucahuantico@gmail.com</a>
       </p>
+      <p class="footer__credit">Fotos de <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
     </div>
   </footer>
 
