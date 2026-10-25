@@ -155,11 +155,76 @@ chart.addEventListener("keydown", (e) => {
   }
 });
 
-/* ---------- Tratamientos: preseleccionan el motivo ---------- */
+/* ---------- Selector de tratamientos ---------- */
+
+const chooser = document.querySelector(".chooser");
+const chooserTabs = chooser.querySelector(".chooser__tabs");
+const tabs = [...chooser.querySelectorAll('[role="tab"]')];
+const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let current = 0;
+let stoppedByUser = false;
+
+function showTab(index) {
+  tabs.forEach((tab, i) => {
+    const active = i === index;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+    panels[i].classList.toggle("is-active", active);
+    panels[i].hidden = !active;
+  });
+  current = index;
+
+  // En celular las pestañas se desplazan de lado: mantener visible la activa
+  if (chooserTabs.scrollWidth > chooserTabs.clientWidth) {
+    chooserTabs.scrollTo({ left: tabs[index].offsetLeft - 16, behavior: "smooth" });
+  }
+}
+
+function stopAutoplay() {
+  stoppedByUser = true;
+  chooser.classList.remove("is-playing");
+}
+
+tabs.forEach((tab, i) => {
+  tab.addEventListener("click", () => {
+    stopAutoplay();
+    showTab(i);
+  });
+});
+
+chooserTabs.addEventListener("keydown", (e) => {
+  const moves = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+  let next = null;
+  if (e.key in moves) next = (current + moves[e.key] + tabs.length) % tabs.length;
+  if (e.key === "Home") next = 0;
+  if (e.key === "End") next = tabs.length - 1;
+  if (next === null) return;
+  e.preventDefault();
+  stopAutoplay();
+  showTab(next);
+  tabs[next].focus();
+});
+
+// Avanza solo cuando termina de llenarse la barra de la pestaña activa
+chooser.addEventListener("animationend", (e) => {
+  if (e.animationName === "progress" && chooser.classList.contains("is-playing")) {
+    showTab((current + 1) % tabs.length);
+  }
+});
+
+// Solo avanza mientras el selector está en pantalla
+if (!reduceMotion) {
+  new IntersectionObserver(([entry]) => {
+    chooser.classList.toggle("is-playing", entry.isIntersecting && !stoppedByUser);
+  }, { threshold: 0.4 }).observe(chooser);
+}
+
+/* ---------- Botones con motivo: preseleccionan el formulario ---------- */
 
 const motivo = document.getElementById("motivo");
 
-document.querySelectorAll("[data-motivo]").forEach((link) => {
+document.querySelectorAll("a[data-motivo]").forEach((link) => {
   link.addEventListener("click", () => {
     motivo.value = link.dataset.motivo;
     motivo.closest(".field").classList.remove("is-invalid");

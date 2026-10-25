@@ -1,6 +1,8 @@
 /* ---------- Variables ---------- */
 :root {
+  --noche: #1a0a33;
   --morado: #2b1150;
+  --ciruela: #4b1d6e;
   --morado-hover: #44207a;
   --lila: #f1ebf8;
   --lila-borde: #d8cbea;
@@ -73,9 +75,9 @@ a {
 
 .container {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 4vw, 48px);
 }
 
 .section {
@@ -213,8 +215,50 @@ a {
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 72px 0 96px;
-  background: var(--morado);
+  padding: 72px 0 0;
+  background:
+    radial-gradient(ellipse 45% 55% at 88% 30%, rgba(201, 47, 120, 0.32), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(75, 29, 110, 0.9), transparent 70%),
+    linear-gradient(180deg, var(--morado), var(--noche));
+}
+
+.hero__trust {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 72px;
+  padding-top: 28px;
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero__trust li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--lila-texto);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.hero__trust svg {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  border-radius: 10px;
+  background: rgba(243, 156, 196, 0.14);
+  fill: none;
+  stroke: var(--orquidea-clara);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero__trust strong {
+  display: block;
+  color: var(--blanco);
 }
 
 .hero__copy h1 {
@@ -447,42 +491,275 @@ a {
   color: var(--gris);
 }
 
+/* ---------- Franja en movimiento ---------- */
+.ribbon {
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--orquidea), #9b2a8f 50%, var(--orquidea));
+  color: var(--blanco);
+  padding: 16px 0;
+}
+
+.ribbon__track {
+  display: flex;
+  width: max-content;
+  animation: ribbon 40s linear infinite;
+}
+
+.ribbon__track span {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+  font-family: var(--display);
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+.ribbon__track span::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orquidea-clara);
+}
+
+@keyframes ribbon {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* ---------- Tratamientos ---------- */
-.treatments__list {
-  list-style: none;
+.treatments {
+  background:
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(201, 47, 120, 0.28), transparent 70%),
+    linear-gradient(160deg, var(--ciruela), var(--noche) 70%);
+  color: var(--blanco);
+}
+
+.treatments h2 {
+  color: var(--blanco);
+}
+
+.treatments__intro {
+  max-width: 36rem;
+  margin-top: 12px;
+  color: var(--lila-texto);
+  font-size: 1.1rem;
+}
+
+.chooser {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px 40px;
-  margin: 40px 0 0;
-  padding: 0;
+  grid-template-columns: minmax(260px, 4fr) 8fr;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: stretch;
 }
 
-.treatments__list a {
+.chooser__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chooser__tabs button {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 18px 20px 18px 24px;
+  text-align: left;
+  font: inherit;
+  color: var(--lila-texto);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.chooser__tabs button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--blanco);
+}
+
+.chooser__tabs button[aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(243, 156, 196, 0.45);
+  color: var(--blanco);
+}
+
+.chooser__tabs button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--orquidea);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.chooser__tabs button[aria-selected="true"]::before {
+  opacity: 1;
+}
+
+.chooser__tabs :focus-visible {
+  outline-color: var(--blanco);
+}
+
+.chooser__name {
+  font-family: var(--display);
+  font-size: 1.2rem;
+}
+
+.chooser__hint {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Barra que se llena mientras el selector avanza solo */
+.chooser__progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--orquidea-clara);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.chooser.is-playing button[aria-selected="true"] .chooser__progress {
+  animation: progress var(--chooser-delay, 6s) linear forwards;
+}
+
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.chooser__stage {
+  position: relative;
+  min-height: 560px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--noche);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
+}
+
+/* Las fotos se superponen y se funden; la saliente se oculta al terminar el fundido */
+.chooser__panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.chooser__panel[hidden] {
   display: block;
+  visibility: hidden;
+}
+
+.chooser__panel.is-active {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.chooser:hover .chooser__progress,
+.chooser:focus-within .chooser__progress {
+  animation-play-state: paused;
+}
+
+.chooser__panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  padding: 24px 0;
-  border-top: 1px solid var(--borde);
-  text-decoration: none;
+  object-fit: cover;
+  transform: scale(1.02);
 }
 
-.treatments__list h3 {
-  margin-bottom: 6px;
+/* La foto activa hace un acercamiento lento */
+.chooser__panel.is-active img {
+  animation: kenburns 9s ease-out forwards;
 }
 
-.treatments__list a:hover h3 {
-  text-decoration: underline;
-  text-decoration-color: var(--orquidea);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 5px;
+@keyframes kenburns {
+  from {
+    transform: scale(1.02) translate(0, 0);
+  }
+  to {
+    transform: scale(1.14) translate(-2%, -1.5%);
+  }
 }
 
-.treatments__list p {
-  color: var(--gris);
+.chooser__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 10, 51, 0.95) 0%, rgba(26, 10, 51, 0.55) 40%, rgba(26, 10, 51, 0) 70%);
+}
+
+.chooser__info {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px;
+  transform: translateY(12px);
+  transition: transform 0.8s ease;
+}
+
+.chooser__panel.is-active .chooser__info {
+  transform: none;
+}
+
+.chooser__info h3 {
+  color: var(--blanco);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin-bottom: 10px;
+}
+
+.chooser__info p {
+  max-width: 34rem;
+  color: var(--lila-texto);
+}
+
+.chooser__info dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 20px 0 24px;
+}
+
+.chooser__info dt {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--orquidea-clara);
+}
+
+.chooser__info dd {
+  margin: 0;
+  color: var(--blanco);
+}
+
+.chooser__info :focus-visible {
+  outline-color: var(--blanco);
 }
 
 /* ---------- Agendar ---------- */
 .booking {
-  background: var(--morado);
+  background:
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(201, 47, 120, 0.25), transparent 70%),
+    linear-gradient(200deg, var(--ciruela), var(--morado) 45%, var(--noche));
   color: var(--blanco);
   scroll-margin-top: 72px;
 }
@@ -651,26 +928,43 @@ select:focus {
   gap: 12px;
 }
 
-/* ---------- Doctora ---------- */
+/* ---------- Doctora: foto a sangre hasta el borde izquierdo ---------- */
+.doctor {
+  background: var(--lila);
+}
+
 .doctor__grid {
   display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 72px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
 }
 
 .doctor__photo {
+  position: relative;
   margin: 0;
+  min-height: 640px;
 }
 
 .doctor__photo img {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 11;
+  height: 100%;
   object-fit: cover;
-  border-radius: 28px;
-  box-shadow: 18px 18px 0 var(--lila);
+  object-position: center 25%;
+}
+
+.doctor__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 70%, rgba(241, 235, 248, 0.6));
+}
+
+.doctor__copy {
+  align-self: center;
+  max-width: 640px;
+  padding: 96px clamp(24px, 6vw, 96px);
 }
 
 .doctor__copy h2 {
@@ -897,35 +1191,91 @@ select:focus {
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: 40px 0;
+  padding: 72px 0 32px;
   font-size: 0.95rem;
-  color: var(--gris);
+  background: var(--noche);
+  color: var(--lila-texto);
 }
 
-.footer__inner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 40px;
-  align-items: flex-start;
-  justify-content: space-between;
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.3fr 1.2fr;
+  gap: 40px;
+}
+
+.footer ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
 }
 
 .footer a {
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 .footer a:hover {
-  color: var(--morado);
+  color: var(--blanco);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer :focus-visible {
+  outline-color: var(--blanco);
 }
 
 .footer__brand {
   font-family: var(--display);
-  font-size: 1.25rem;
-  color: var(--morado);
+  font-size: 1.6rem;
+  color: var(--blanco);
+  margin-bottom: 10px;
 }
 
-.footer__credit {
+.footer__about p:not(.footer__brand) {
+  max-width: 22rem;
+}
+
+.footer__title {
+  font-weight: 700;
+  color: var(--orquidea-clara);
+  margin-bottom: 12px;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.85rem;
+}
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #25d366;
+  color: var(--blanco);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s;
+}
+
+.wa-float:hover {
+  transform: scale(1.06);
+}
+
+.wa-float:focus-visible {
+  outline-color: var(--morado);
 }
 
 /* ---------- Responsive ---------- */
@@ -948,7 +1298,42 @@ select:focus {
   }
 
   .doctor__photo {
-    max-width: 420px;
+    min-height: 420px;
+  }
+
+  .doctor__photo::after {
+    background: linear-gradient(180deg, transparent 70%, rgba(241, 235, 248, 0.6));
+  }
+
+  .doctor__copy {
+    max-width: none;
+    padding: 56px clamp(16px, 4vw, 48px) 72px;
+  }
+
+  .chooser {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .chooser__tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .chooser__tabs button {
+    flex: none;
+    width: auto;
+    scroll-snap-align: start;
+  }
+
+  .chooser__stage {
+    min-height: 520px;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .reviews__list {
@@ -972,10 +1357,6 @@ select:focus {
   .steps {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .treatments__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 600px) {
@@ -988,7 +1369,33 @@ select:focus {
   }
 
   .hero {
-    padding: 40px 0 64px;
+    padding: 40px 0 0;
+  }
+
+  .hero__trust {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .chooser__stage {
+    min-height: 560px;
+  }
+
+  .chooser__info {
+    padding: 24px 20px;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    width: 54px;
+    height: 54px;
   }
 
   .logo__text {
@@ -1005,15 +1412,10 @@ select:focus {
   }
 
   .steps,
-  .treatments__list,
   .field-row,
   .doctor__facts,
   .gallery {
     grid-template-columns: 1fr;
-  }
-
-  .doctor__photo img {
-    box-shadow: 10px 10px 0 var(--lila);
   }
 
   .reviews__list li {
@@ -1032,9 +1434,6 @@ select:focus {
     padding: 24px 18px;
   }
 
-  .footer__inner {
-    flex-direction: column;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1044,5 +1443,11 @@ select:focus {
 
   * {
     transition: none !important;
+    animation: none !important;
+  }
+
+  .ribbon__track {
+    flex-wrap: wrap;
+    width: auto;
   }
 }
