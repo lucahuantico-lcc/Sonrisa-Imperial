@@ -46,6 +46,7 @@
       </a>
       <nav class="nav" aria-label="Secciones">
         <a href="#doctora">La doctora</a>
+        <a href="#dientes">Tu diente</a>
         <a href="#tratamientos">Tratamientos</a>
         <a href="#opiniones">Opiniones</a>
         <a href="#ubicacion">Ubicación</a>
@@ -55,22 +56,79 @@
   </header>
 
   <main>
-    <!-- Hero: el odontograma es el elemento protagonista -->
+    <!-- Hero claro con foto en arco y la doctora como cara de la marca -->
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__copy">
-          <h1>Señálanos el diente. Del resto nos encargamos.</h1>
+          <h1>Tu dentista de confianza, a la vuelta de tu casa.</h1>
           <p class="lead">
             Somos una clínica dental en Villa María del Triunfo. En tu primera visita
             revisamos tu boca completa y te explicamos qué necesitas y cuánto cuesta,
             antes de empezar cualquier tratamiento.
           </p>
-          <a href="#agendar" class="btn btn--accent">Agendar mi cita</a>
+          <div class="hero__actions">
+            <a href="#agendar" class="btn btn--primary">Agendar mi cita</a>
+            <!-- DEMO: calificación de ejemplo -->
+            <a href="#opiniones" class="rating">
+              <span class="rating__score">4.9</span>
+              <span><span class="rating__stars" aria-hidden="true">★★★★★</span>120 opiniones de pacientes</span>
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero__media">
+          <img src="https://images.unsplash.com/photo-1606811842243-af7e16970c1f?w=1100&h=1300&fit=crop" alt="Dentista conversando con una paciente en el consultorio" width="1100" height="1300">
           <!-- DEMO: doctora ficticia, reemplazar por la foto y el nombre reales -->
           <a href="#doctora" class="hero__doctor">
-            <img src="https://images.unsplash.com/photo-1770134223774-13b735e29201?w=160&h=160&fit=crop&crop=faces" alt="" width="56" height="56">
-            <span>Te atiende la <strong>Dra. Camila Ríos</strong>, cirujana dentista con 12 años de experiencia</span>
+            <img src="https://images.unsplash.com/photo-1770134223774-13b735e29201?w=160&h=160&fit=crop&crop=faces" alt="" width="52" height="52">
+            <span><strong>Dra. Camila Ríos</strong> Cirujana dentista, 12 años de experiencia</span>
           </a>
+        </figure>
+      </div>
+
+      <!-- DEMO: cifras de ejemplo -->
+      <dl class="container stats">
+        <div>
+          <dt>Años en el distrito</dt>
+          <dd><span data-count="12">12</span></dd>
+        </div>
+        <div>
+          <dt>Pacientes atendidos</dt>
+          <dd><span data-count="3000">3000</span>+</dd>
+        </div>
+        <div>
+          <dt>Tratamientos en un solo lugar</dt>
+          <dd><span data-count="8">8</span></dd>
+        </div>
+        <div>
+          <dt>Te respondemos en</dt>
+          <dd><span data-count="24">24</span> h</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Franja en movimiento con los tratamientos -->
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon__track">
+        <span>Limpieza dental</span><span>Ortodoncia</span><span>Implantes</span><span>Blanqueamiento</span><span>Odontopediatría</span><span>Urgencias</span><span>Endodoncia</span><span>Coronas</span>
+        <span>Limpieza dental</span><span>Ortodoncia</span><span>Implantes</span><span>Blanqueamiento</span><span>Odontopediatría</span><span>Urgencias</span><span>Endodoncia</span><span>Coronas</span>
+      </div>
+    </div>
+
+    <!-- Odontograma: el paciente marca el diente que le molesta -->
+    <section class="section teeth" id="dientes">
+      <div class="container teeth__grid">
+        <div class="teeth__copy">
+          <h2>Señálanos el diente. Del resto nos encargamos.</h2>
+          <p>
+            No necesitas saber cómo se llama. Toca en el dibujo el diente que te duele o te preocupa
+            y lo agregamos a tu mensaje de WhatsApp. Así la doctora llega a tu cita sabiendo qué revisar.
+          </p>
+          <ul class="teeth__list">
+            <li>Puedes marcar varios dientes</li>
+            <li>Si no te molesta ninguno, agenda igual</li>
+            <li>Tus datos solo se usan para tu cita</li>
+          </ul>
         </div>
 
         <div class="chart">
@@ -85,30 +143,7 @@
           </div>
         </div>
       </div>
-
-      <ul class="container hero__trust">
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <span><strong>Desde 2014</strong> en Villa María del Triunfo</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
-          <span><strong>Paga como prefieras</strong> Yape, Plin, efectivo o tarjeta</span>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <span><strong>Respuesta en 24 horas</strong> por WhatsApp</span>
-        </li>
-      </ul>
     </section>
-
-    <!-- Franja en movimiento con los tratamientos -->
-    <div class="ribbon" aria-hidden="true">
-      <div class="ribbon__track">
-        <span>Limpieza dental</span><span>Ortodoncia</span><span>Implantes</span><span>Blanqueamiento</span><span>Odontopediatría</span><span>Urgencias</span><span>Endodoncia</span><span>Coronas</span>
-        <span>Limpieza dental</span><span>Ortodoncia</span><span>Implantes</span><span>Blanqueamiento</span><span>Odontopediatría</span><span>Urgencias</span><span>Endodoncia</span><span>Coronas</span>
-      </div>
-    </div>
 
     <!-- DEMO: datos ficticios de la doctora, reemplazar por los reales -->
     <section class="doctor" id="doctora">

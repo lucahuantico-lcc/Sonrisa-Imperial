@@ -220,6 +220,29 @@ if (!reduceMotion) {
   }, { threshold: 0.4 }).observe(chooser);
 }
 
+/* ---------- Cifras: cuentan desde cero cuando aparecen en pantalla ---------- */
+
+const counters = document.querySelectorAll("[data-count]");
+
+if (!reduceMotion) {
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(({ isIntersecting, target }) => {
+      if (!isIntersecting) return;
+      countObserver.unobserve(target);
+      const end = Number(target.dataset.count);
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min((now - start) / 1400, 1);
+        target.textContent = Math.round(end * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach((el) => countObserver.observe(el));
+}
+
 /* ---------- Botones con motivo: preseleccionan el formulario ---------- */
 
 const motivo = document.getElementById("motivo");
