@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Superficial | Clínica estética en [CIUDAD]</title>
+  <meta name="description" content="Clínica Superficial, clínica estética en [CIUDAD]. Limpiezas faciales, tratamiento de acné y manchas, láser y más. Reserva tu evaluación por WhatsApp.">
+  <meta name="theme-color" content="#ea580c">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Clínica Superficial | Lo superficial también importa">
+  <meta property="og:description" content="Clínica estética en [CIUDAD]. Reserva tu evaluación por WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a href="#contenido" class="skip">Saltar al contenido</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo" aria-label="Clínica Superficial, inicio">
+        <span class="logo__mark" aria-hidden="true">CS</span>
+        <span class="logo__text">Clínica Superficial</span>
+      </a>
+      <a href="#reservar" class="btn btn--primary btn--small">Reservar mi cita</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- Hero: el selector de "qué quieres consentir" alimenta el formulario -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="tag">Clínica estética en [CIUDAD]</p>
+          <h1>Lo superficial <span class="hl">también importa.</span></h1>
+          <p class="lead">
+            Cuidamos tu piel con ciencia, buena vibra y cero juicios.
+            En tu primera visita te evaluamos, te contamos qué te sirve (y qué no)
+            y te damos el precio antes de empezar.
+          </p>
+          <a href="#reservar" class="btn btn--primary btn--big">Reservar mi cita</a>
+          <p class="hero__note">Sin compromiso. Si no te convence, no pasa nada.</p>
+        </div>
+
+        <div class="picker">
+          <p class="picker__title" id="picker-title">¿Qué quieres consentir hoy?</p>
+          <p class="picker__hint">Toca todo lo que aplique. Lo sumamos a tu reserva.</p>
+          <div class="picker__chips" role="group" aria-labelledby="picker-title">
+            <button type="button" class="chip" aria-pressed="false">✨ Glow en la cara</button>
+            <button type="button" class="chip" aria-pressed="false">🫧 Granitos y acné</button>
+            <button type="button" class="chip" aria-pressed="false">☀️ Manchas</button>
+            <button type="button" class="chip" aria-pressed="false">💤 Ojeras</button>
+            <button type="button" class="chip" aria-pressed="false">〰️ Líneas de expresión</button>
+            <button type="button" class="chip" aria-pressed="false">💋 Labios</button>
+            <button type="button" class="chip" aria-pressed="false">🦵 Adiós vellos</button>
+            <button type="button" class="chip" aria-pressed="false">🍑 Cuerpo</button>
+          </div>
+          <p class="picker__count" id="picker-count" aria-live="polite">Aún no eliges nada. También puedes reservar sin elegir.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="band" aria-hidden="true">
+      <div class="band__track">
+        <span>Piel feliz</span><span>✦</span><span>Cero juicios</span><span>✦</span><span>Precio claro</span><span>✦</span><span>Resultados reales</span><span>✦</span>
+        <span>Piel feliz</span><span>✦</span><span>Cero juicios</span><span>✦</span><span>Precio claro</span><span>✦</span><span>Resultados reales</span><span>✦</span>
+      </div>
+    </div>
+
+    <section class="section" id="tratamientos">
+      <div class="container">
+        <h2>El menú <span class="hl">del glow</span></h2>
+        <p class="section__lead">Toca uno y lo dejamos marcado en tu reserva.</p>
+        <ul class="cards">
+          <li>
+            <a href="#reservar" class="card" data-motivo="Limpieza facial profunda">
+              <span class="card__emoji" aria-hidden="true">🧼</span>
+              <h3>Limpieza facial profunda</h3>
+              <p>Sacamos puntos negros e impurezas y dejamos tu piel respirando. Ideal para empezar.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#reservar" class="card" data-motivo="Tratamiento de acné">
+              <span class="card__emoji" aria-hidden="true">🫧</span>
+              <h3>Acné bajo control</h3>
+              <p>Calmamos los brotes y trabajamos las marcas que dejan. Con plan, no con suerte.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#reservar" class="card" data-motivo="Manchas">
+              <span class="card__emoji" aria-hidden="true">☀️</span>
+              <h3>Chau manchas</h3>
+              <p>Peelings (una exfoliación controlada) para emparejar el tono de tu piel.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#reservar" class="card" data-motivo="Hidratación profunda">
+              <span class="card__emoji" aria-hidden="true">💧</span>
+              <h3>Hidratación profunda</h3>
+              <p>Ácido hialurónico, la sustancia que tu piel ya tiene para verse jugosa, en dosis extra.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#reservar" class="card" data-motivo="Líneas de expresión">
+              <span class="card__emoji" aria-hidden="true">〰️</span>
+              <h3>Líneas de expresión</h3>
+              <p>Suavizamos arruguitas de frente y ojos sin que dejes de parecer tú.</p>
+            </a>
+          </li>
+          <li>
+            <a href="#reservar" class="card" data-motivo="Depilación láser">
+              <span class="card__emoji" aria-hidden="true">⚡</span>
+              <h3>Depilación láser</h3>
+              <p>Menos rasuradora, menos cera, menos drama. Sesiones rápidas y llevaderas.</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section why">
+      <div class="container">
+        <h2>Por qué nos eligen</h2>
+        <ul class="why__list">
+          <li>
+            <strong>Te decimos la verdad</strong>
+            <p>Si algo no lo necesitas, te lo decimos. No vendemos tratamientos por vender.</p>
+          </li>
+          <li>
+            <strong>Precio antes de empezar</strong>
+            <p>Sabes cuánto pagas desde la evaluación. Cero letras chiquitas.</p>
+          </li>
+          <li>
+            <strong>Nada de dolor innecesario</strong>
+            <p>Usamos crema anestésica cuando hace falta y te explicamos cada paso.</p>
+          </li>
+          <li>
+            <strong>Resultados naturales</strong>
+            <p>Queremos que te digan "te ves increíble", no "¿qué te hiciste?".</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="equipo">
+      <div class="container">
+        <h2>Las manos <span class="hl">detrás del glow</span></h2>
+        <!-- Reemplazar por el equipo real: nombre, cargo, años de experiencia y foto -->
+        <ul class="team">
+          <li class="member">
+            <span class="member__avatar" aria-hidden="true">1</span>
+            <h3>[NOMBRE ESPECIALISTA 1]</h3>
+            <p class="member__role">[CARGO] · [AÑOS] años de experiencia</p>
+          </li>
+          <li class="member">
+            <span class="member__avatar" aria-hidden="true">2</span>
+            <h3>[NOMBRE ESPECIALISTA 2]</h3>
+            <p class="member__role">[CARGO] · [AÑOS] años de experiencia</p>
+          </li>
+          <li class="member">
+            <span class="member__avatar" aria-hidden="true">3</span>
+            <h3>[NOMBRE ESPECIALISTA 3]</h3>
+            <p class="member__role">[CARGO] · [AÑOS] años de experiencia</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section quotes">
+      <div class="container">
+        <h2>Lo que dicen <span class="hl">nuestras pieles</span></h2>
+        <!-- Testimonios de ejemplo: reemplazar por testimonios reales con permiso de cada cliente -->
+        <ul class="quotes__list">
+          <li>
+            <blockquote>
+              <p>"Llegué con el acné en modo jefe final y ahora salgo sin base. Me explicaron todo sin hacerme sentir mal."</p>
+              <footer>[NOMBRE CLIENTE 1]</footer>
+            </blockquote>
+          </li>
+          <li>
+            <blockquote>
+              <p>"Fui por una limpieza y me dijeron que no necesitaba nada más. Por eso volví."</p>
+              <footer>[NOMBRE CLIENTE 2]</footer>
+            </blockquote>
+          </li>
+          <li>
+            <blockquote>
+              <p>"Le tenía miedo al láser y fue mucho más tranquilo de lo que pensaba. 10/10."</p>
+              <footer>[NOMBRE CLIENTE 3]</footer>
+            </blockquote>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section booking" id="reservar">
+      <div class="container booking__grid">
+        <div class="booking__info">
+          <h2>Reserva tu cita</h2>
+          <p>Llena tus datos y te llevamos a WhatsApp con el mensaje listo. Solo le das enviar.</p>
+          <dl class="facts">
+            <div>
+              <dt>Dónde estamos</dt>
+              <dd>[DIRECCIÓN], [CIUDAD]</dd>
+            </div>
+            <div>
+              <dt>Horario</dt>
+              <dd>[HORARIOS]</dd>
+            </div>
+            <div>
+              <dt>WhatsApp</dt>
+              <dd>[WHATSAPP]</dd>
+            </div>
+            <div>
+              <dt>Formas de pago</dt>
+              <dd>[MÉTODOS DE PAGO]</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="panel">
+          <form class="form" id="booking-form" novalidate>
+            <div class="field">
+              <label for="nombre">¿Cómo te llamas?</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+              <label for="telefono">Tu celular</label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" required>
+            </div>
+
+            <div class="field">
+              <label for="motivo">¿Qué te interesa?</label>
+              <select id="motivo" name="motivo" required>
+                <option value="" disabled selected>Elige una opción</option>
+                <option>Evaluación general</option>
+                <option>Limpieza facial profunda</option>
+                <option>Tratamiento de acné</option>
+                <option>Manchas</option>
+                <option>Hidratación profunda</option>
+                <option>Líneas de expresión</option>
+                <option>Depilación láser</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <p class="form__picked" id="form-picked" hidden></p>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="fecha">Día que prefieres</label>
+                <input type="date" id="fecha" name="fecha" required>
+              </div>
+              <div class="field">
+                <label for="horario">Horario</label>
+                <select id="horario" name="horario" required>
+                  <option value="" disabled selected>Elige</option>
+                  <option>Mañana</option>
+                  <option>Tarde</option>
+                  <option>Noche</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="form__error" id="form-error" role="alert" hidden>
+              Te faltan algunos datos. Revisa los campos en rojo.
+            </p>
+
+            <button type="submit" class="btn btn--primary btn--block btn--big">Reservar mi cita</button>
+            <p class="form__note">Tus datos solo se usan para coordinar tu cita.</p>
+          </form>
+
+          <div class="success" id="booking-success" hidden>
+            <h2>¡Listo! 🎉</h2>
+            <p id="success-text">Abrimos WhatsApp con tu reserva. Solo presiona enviar.</p>
+            <div class="success__actions">
+              <a href="#" class="btn btn--primary" id="whatsapp-link" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a>
+              <button type="button" class="btn btn--outline" id="booking-reset">Hacer otra reserva</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand">Clínica Superficial</p>
+      <p>Clínica estética en [CIUDAD]. Superficial, pero con ciencia.</p>
+      <p>[DIRECCIÓN] · [HORARIOS] · WhatsApp [WHATSAPP]</p>
+      <a href="#reservar" class="btn btn--light">Reservar mi cita</a>
+    </div>
+  </footer>
+
+  <a href="#reservar" class="wa-float" id="wa-float" aria-label="Reservar mi cita por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/>
+    </svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
