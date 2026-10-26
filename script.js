@@ -243,6 +243,15 @@ if (!reduceMotion) {
   counters.forEach((el) => countObserver.observe(el));
 }
 
+/* ---------- Antes y después: la línea sigue al deslizador ---------- */
+
+document.querySelectorAll(".compare").forEach((compare) => {
+  const range = compare.querySelector(".compare__range");
+  range.addEventListener("input", () => {
+    compare.style.setProperty("--pos", `${range.value}%`);
+  });
+});
+
 /* ---------- Botones con motivo: preseleccionan el formulario ---------- */
 
 const motivo = document.getElementById("motivo");
