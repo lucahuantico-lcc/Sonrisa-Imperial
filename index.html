@@ -46,7 +46,7 @@
       </a>
       <nav class="nav" aria-label="Secciones">
         <a href="#doctora">La doctora</a>
-        <a href="#dientes">Tu diente</a>
+        <a href="#por-que">Por qué elegirnos</a>
         <a href="#tratamientos">Tratamientos</a>
         <a href="#opiniones">Opiniones</a>
         <a href="#ubicacion">Ubicación</a>
@@ -105,6 +105,57 @@
           <dd><span data-count="24">24</span> h</dd>
         </div>
       </dl>
+    </section>
+
+    <!-- Accesos rápidos: lo que el paciente viene a hacer -->
+    <section class="quick" aria-labelledby="quick-title">
+      <div class="container">
+        <h2 id="quick-title">¿Qué deseas hacer hoy?</h2>
+        <ul class="quick__grid">
+          <li>
+            <a href="#agendar">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>
+              <span class="quick__title">Agendar una cita</span>
+              <span class="quick__text">Elige día y horario</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/51925659628?text=Hola%2C%20tengo%20dolor%20y%20necesito%20una%20cita%20urgente." target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+              <span class="quick__title">Tengo dolor hoy</span>
+              <span class="quick__text">Te atendemos el mismo día</span>
+            </a>
+          </li>
+          <li>
+            <a href="#dientes">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 7.5.6 2 .8 5 2.3 5 1.4 0 1.5-2.5 2.2-4.3.4-1 .9-1.4 2.5-1.4s2.1.4 2.5 1.4c.7 1.8.8 4.3 2.2 4.3 1.5 0 1.7-3 2.3-5 .8-2.5 2-4.5 2-7.5 0-2.5-1.5-4.5-4-4.5-2 0-3 1-5 1s-3-1-5-1z"/></svg>
+              <span class="quick__title">Marcar mi diente</span>
+              <span class="quick__text">Dinos dónde te molesta</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tratamientos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              <span class="quick__title">Ver tratamientos</span>
+              <span class="quick__text">Con duración y precios</span>
+            </a>
+          </li>
+          <li>
+            <a href="#ubicacion">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span class="quick__title">Cómo llegar</span>
+              <span class="quick__text">Mapa y horarios</span>
+            </a>
+          </li>
+          <li>
+            <a href="#preguntas">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg>
+              <span class="quick__title">Resolver una duda</span>
+              <span class="quick__text">Preguntas frecuentes</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- Franja en movimiento con los tratamientos -->
@@ -181,6 +232,52 @@
             </div>
           </dl>
         </div>
+      </div>
+    </section>
+
+    <!-- DEMO: diferenciales de ejemplo, confirmar con la clínica -->
+    <section class="section why" id="por-que">
+      <div class="container why__grid">
+        <div class="why__intro">
+          <h2>¿Por qué elegirnos?</h2>
+          <p>Somos una clínica de barrio con estándares de clínica grande. Esto es lo que nuestros pacientes valoran más.</p>
+          <figure class="why__photo">
+            <img src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?w=900&h=700&fit=crop" alt="Sala dental con sillón y monitor" width="900" height="700" loading="lazy">
+            <figcaption><strong>12 años</strong> cuidando sonrisas en Lima Sur</figcaption>
+          </figure>
+        </div>
+        <ul class="why__list">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg>
+            <h3>Precio claro antes de empezar</h3>
+            <p>Te damos el presupuesto por escrito en tu primera visita. Sin cobros sorpresa a mitad del tratamiento.</p>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <h3>Citas sin apuro</h3>
+            <p>Cada cita tiene tiempo para explicarte lo que vamos a hacer y resolver tus dudas.</p>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <h3>Bioseguridad en cada cita</h3>
+            <p>Instrumentos esterilizados en autoclave y material descartable para cada paciente.</p>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 11l2-2 2 2 4-4"/></svg>
+            <h3>Radiografía digital</h3>
+            <p>Diagnóstico más preciso, con menos radiación, y ves tus radiografías en pantalla junto a la doctora.</p>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg>
+            <h3>Pagos en cuotas</h3>
+            <p>Ortodoncia e implantes en cuotas sin intereses. Pagas con Yape, Plin, efectivo o tarjeta.</p>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10M10 20v-5h4v5"/></svg>
+            <h3>Cerca de tu casa</h3>
+            <p>En Villa María del Triunfo. Sin viajar al centro de Lima ni perder medio día en el tráfico.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -355,8 +452,51 @@
       </div>
     </section>
 
+    <!-- DEMO: consejos de ejemplo -->
+    <section class="section tips" id="consejos">
+      <div class="container">
+        <h2>Consejos de la doctora</h2>
+        <p class="tips__intro">Respuestas cortas a lo que más nos preguntan en consulta.</p>
+        <ul class="tips__grid">
+          <li>
+            <img src="https://images.unsplash.com/photo-1609840113564-ab4aba4956c4?w=800&h=560&fit=crop" alt="Joven cepillándose los dientes" width="800" height="560" loading="lazy">
+            <div class="tips__body">
+              <p class="tips__tag">Prevención</p>
+              <h3>¿Cada cuánto debo hacerme una limpieza?</h3>
+              <details>
+                <summary>Leer consejo</summary>
+                <p>Cada seis meses. Aunque te cepilles bien, el sarro se forma en zonas que el cepillo no alcanza, y con el tiempo inflama las encías. Una limpieza a tiempo es más barata que tratar una caries.</p>
+              </details>
+            </div>
+          </li>
+          <li>
+            <img src="https://images.unsplash.com/photo-1758600432436-f8abdbf44bde?w=800&h=560&fit=crop" alt="Hombre pensativo tocándose la mandíbula" width="800" height="560" loading="lazy">
+            <div class="tips__body">
+              <p class="tips__tag">Urgencias</p>
+              <h3>Me duele una muela de noche, ¿qué hago?</h3>
+              <details>
+                <summary>Leer consejo</summary>
+                <p>Enjuágate con agua tibia y sal, no pongas calor en la cara y toma un analgésico que ya hayas usado antes. No dejes pasar días: escríbenos en la mañana y te buscamos un espacio ese mismo día.</p>
+              </details>
+            </div>
+          </li>
+          <li>
+            <img src="https://images.unsplash.com/photo-1758205307836-0829c799890b?w=800&h=560&fit=crop" alt="Dentista revisando los dientes de un niño" width="800" height="560" loading="lazy">
+            <div class="tips__body">
+              <p class="tips__tag">Niños</p>
+              <h3>¿Cuándo llevo a mi hijo al dentista por primera vez?</h3>
+              <details>
+                <summary>Leer consejo</summary>
+                <p>Cuando le sale el primer diente o antes de cumplir un año. La primera visita es corta y sirve para que conozca el consultorio sin miedo y para revisar cómo le estás cepillando.</p>
+              </details>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- DEMO: precios y condiciones de ejemplo, confirmar con la clínica -->
-    <section class="section faq">
+    <section class="section faq" id="preguntas">
       <div class="container faq__grid">
         <h2>Preguntas frecuentes</h2>
         <div class="faq__list">
@@ -493,6 +633,17 @@
               <dd>Yape, Plin, efectivo y tarjetas de débito o crédito</dd>
             </div>
           </dl>
+          <div class="districts">
+            <p class="districts__title">Llegas fácil desde</p>
+            <ul>
+              <li>San Juan de Miraflores</li>
+              <li>Villa El Salvador</li>
+              <li>San Gabriel</li>
+              <li>Tablada de Lurín</li>
+              <li>Pachacámac</li>
+              <li>Chorrillos</li>
+            </ul>
+          </div>
           <a href="https://www.google.com/maps/search/?api=1&query=Villa+Mar%C3%ADa+del+Triunfo%2C+Lima" class="btn btn--outline" target="_blank" rel="noopener">Abrir en Google Maps</a>
         </div>
         <div class="location__map">
@@ -539,6 +690,7 @@
   </footer>
 
   <a href="https://wa.me/51925659628?text=Hola%2C%20quiero%20agendar%20una%20cita%20en%20Sonrisa%20Imperial." class="wa-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+    <span class="wa-float__label">¿Tienes dudas? <strong>Escríbenos</strong></span>
     <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>
   </a>
 

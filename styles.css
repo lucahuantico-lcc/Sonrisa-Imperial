@@ -1193,7 +1193,7 @@ select:focus {
 
 /* ---------- Preguntas frecuentes ---------- */
 .faq {
-  background: var(--blanco);
+  background: var(--hueso);
 }
 
 .faq__grid {
@@ -1284,6 +1284,253 @@ select:focus {
   border: 0;
 }
 
+/* ---------- Accesos rápidos ---------- */
+.quick {
+  background: var(--hueso);
+  padding: 8px 0 88px;
+}
+
+.quick h2 {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+}
+
+.quick__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.quick__grid a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding: 22px 18px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.quick__grid a:hover {
+  border-color: var(--grafito);
+  box-shadow: 0 16px 32px -22px rgba(38, 35, 43, 0.5);
+  transform: translateY(-2px);
+}
+
+.quick__grid svg,
+.why__list svg {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: var(--plomo);
+  fill: none;
+  stroke: var(--orquidea);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.quick__title {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  line-height: 1.25;
+  color: var(--grafito);
+}
+
+.quick__text {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+/* ---------- Por qué elegirnos ---------- */
+.why {
+  background: var(--hueso);
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.why__intro {
+  position: sticky;
+  top: 112px;
+}
+
+.why__intro h2 {
+  margin-bottom: 16px;
+}
+
+.why__intro > p {
+  max-width: 28rem;
+  color: var(--gris);
+}
+
+.why__photo {
+  position: relative;
+  margin: 32px 0 0;
+}
+
+.why__photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 7;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.why__photo figcaption {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  max-width: 220px;
+  padding: 14px 18px;
+  background: var(--blanco);
+  border-radius: 14px;
+  box-shadow: 0 20px 40px -20px rgba(38, 35, 43, 0.45);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--gris);
+}
+
+.why__photo figcaption strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--morado);
+}
+
+.why__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.why__list li {
+  padding: 28px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+}
+
+.why__list h3 {
+  margin-bottom: 8px;
+}
+
+.why__list p {
+  font-size: 0.97rem;
+  color: var(--gris);
+}
+
+/* ---------- Consejos ---------- */
+.tips {
+  background: var(--blanco);
+}
+
+.tips__intro {
+  margin-top: 12px;
+  color: var(--gris);
+}
+
+.tips__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0 0;
+  padding: 0;
+}
+
+.tips__grid li {
+  overflow: hidden;
+  background: var(--hueso);
+  border-radius: 22px;
+}
+
+.tips__grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 10 / 7;
+  object-fit: cover;
+}
+
+.tips__body {
+  padding: 22px 24px 24px;
+}
+
+.tips__tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--orquidea);
+  margin-bottom: 6px;
+}
+
+.tips__body h3 {
+  margin-bottom: 12px;
+}
+
+.tips__body summary {
+  display: inline-flex;
+  font-weight: 700;
+  color: var(--morado);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tips__body details[open] summary {
+  margin-bottom: 8px;
+}
+
+.tips__body details p {
+  color: var(--gris);
+  font-size: 0.97rem;
+}
+
+/* ---------- Distritos cercanos ---------- */
+.districts {
+  margin: -8px 0 32px;
+}
+
+.districts__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--orquidea);
+  margin-bottom: 10px;
+}
+
+.districts ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.districts li {
+  padding: 6px 14px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
 /* ---------- Footer ---------- */
 .footer {
   padding: 72px 0 32px;
@@ -1369,6 +1616,22 @@ select:focus {
   transform: scale(1.06);
 }
 
+.wa-float__label {
+  position: absolute;
+  right: 74px;
+  white-space: nowrap;
+  padding: 10px 16px;
+  background: var(--blanco);
+  color: var(--gris);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px -12px rgba(38, 35, 43, 0.45);
+  font-size: 0.9rem;
+}
+
+.wa-float__label strong {
+  color: var(--grafito);
+}
+
 .wa-float:focus-visible {
   outline-color: var(--morado);
 }
@@ -1387,6 +1650,23 @@ select:focus {
 
   .hero__media {
     justify-self: center;
+  }
+
+  .quick__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .why__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .why__intro {
+    position: static;
+  }
+
+  .tips__grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .hero__doctor {
@@ -1500,6 +1780,32 @@ select:focus {
 
   .stats {
     margin-top: 48px;
+  }
+
+  .quick {
+    padding-bottom: 64px;
+  }
+
+  .quick__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .quick__grid a {
+    padding: 18px 14px;
+  }
+
+  .why__list,
+  .tips__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why__list li {
+    padding: 22px;
+  }
+
+  .wa-float__label {
+    display: none;
   }
 
   .stats > div + div {
