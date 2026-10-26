@@ -172,13 +172,17 @@ a {
   border-color: var(--grafito);
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+/* Botón translúcido para usar sobre fotos oscuras */
+.btn--glass {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--blanco);
+  border-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.btn--glass:hover {
+  background: var(--blanco);
+  color: var(--grafito);
 }
 
 /* ---------- Header: barra blanca flotante ---------- */
@@ -832,7 +836,7 @@ a {
 
 .chooser__stage {
   position: relative;
-  min-height: 560px;
+  min-height: 600px;
   border-radius: 28px;
   overflow: hidden;
   background: var(--grafito);
@@ -936,6 +940,28 @@ a {
 .chooser__info dd {
   margin: 0;
   color: var(--blanco);
+}
+
+.chooser__includes {
+  flex-basis: 100%;
+}
+
+.chooser__price {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.chooser__note {
+  font-family: var(--body);
+  font-size: 0.85rem;
+  color: var(--lila-texto);
+}
+
+.chooser__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .chooser__info :focus-visible {
@@ -1631,122 +1657,10 @@ select:focus {
   font-size: 0.9rem;
 }
 
-/* ---------- Precios ---------- */
+/* ---------- Nota de precios ---------- */
 .treatments__more {
-  margin-top: 28px;
-}
-
-.treatments__more a {
-  font-weight: 700;
-  color: var(--morado);
-  text-underline-offset: 3px;
-}
-
-.prices {
-  background: var(--plomo);
-}
-
-.prices__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px 40px;
-}
-
-.prices__head h2 {
-  margin-bottom: 12px;
-}
-
-.prices__head p {
-  max-width: 40rem;
-  color: var(--gris);
-}
-
-.prices__table {
-  width: 100%;
-  margin-top: 40px;
-  border-collapse: collapse;
-  background: var(--blanco);
-  border-radius: 22px;
-  overflow: hidden;
-}
-
-.prices__table th,
-.prices__table td {
-  padding: 18px 24px;
-  text-align: left;
-  vertical-align: middle;
-  border-bottom: 1px solid var(--borde);
-}
-
-.prices__table tbody tr:last-child > * {
-  border-bottom: 0;
-}
-
-.prices__table thead th {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--gris);
-  background: var(--hueso);
-}
-
-.prices__table tbody th {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 1.15rem;
-  color: var(--grafito);
-  white-space: nowrap;
-}
-
-.prices__includes {
-  color: var(--gris);
-  font-size: 0.97rem;
-}
-
-.prices__price {
-  font-family: var(--display);
-  font-size: 1.3rem;
-  color: var(--morado);
-  white-space: nowrap;
-}
-
-.prices__from {
-  font-family: var(--body);
-  font-size: 0.8rem;
-  color: var(--gris);
-}
-
-.prices__note {
-  display: block;
-  font-family: var(--body);
-  font-size: 0.8rem;
-  color: var(--gris);
-  white-space: normal;
-}
-
-.prices__action {
-  text-align: right;
-}
-
-.prices__action a {
-  display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid var(--borde);
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--grafito);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.prices__action a:hover {
-  border-color: var(--grafito);
-}
-
-.prices__payment {
-  margin-top: 20px;
+  max-width: 52rem;
+  margin-top: 24px;
   font-size: 0.95rem;
   color: var(--gris);
 }
@@ -2035,7 +1949,7 @@ select:focus {
   }
 
   .chooser__stage {
-    min-height: 520px;
+    min-height: 600px;
   }
 
   .footer__grid {
@@ -2101,57 +2015,6 @@ select:focus {
     padding-bottom: 64px;
   }
 
-  .prices__table,
-  .prices__table tbody,
-  .prices__table tr,
-  .prices__table th,
-  .prices__table td {
-    display: block;
-  }
-
-  .prices__table thead {
-    display: none;
-  }
-
-  .prices__table tr {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4px 12px;
-    padding: 18px;
-    border-bottom: 1px solid var(--borde);
-  }
-
-  .prices__table tbody tr:last-child {
-    border-bottom: 0;
-  }
-
-  .prices__table th,
-  .prices__table td {
-    padding: 0;
-    border: 0;
-  }
-
-  .prices__table tbody th {
-    white-space: normal;
-  }
-
-  .prices__price {
-    grid-column: 2;
-    grid-row: 1;
-    max-width: 130px;
-    text-align: right;
-  }
-
-  .prices__includes,
-  .prices__action {
-    grid-column: 1 / -1;
-    text-align: left;
-  }
-
-  .prices__action {
-    margin-top: 8px;
-  }
-
   .hero__actions .btn {
     width: 100%;
   }
@@ -2187,7 +2050,7 @@ select:focus {
   }
 
   .chooser__stage {
-    min-height: 560px;
+    min-height: 680px;
   }
 
   .chooser__info {
