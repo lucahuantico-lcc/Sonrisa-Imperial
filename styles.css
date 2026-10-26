@@ -174,15 +174,47 @@ a {
 }
 
 .logo__mark {
+  flex: none;
+}
+
+.logo__crown {
   fill: var(--orquidea);
+}
+
+.logo__tooth {
+  fill: var(--blanco);
   stroke: var(--morado);
-  stroke-width: 1.4;
+  stroke-width: 1.2;
   stroke-linejoin: round;
+}
+
+.logo__words {
+  display: grid;
+  line-height: 1.05;
 }
 
 .logo__text {
   font-family: var(--display);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
+}
+
+.logo__tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--gris);
+}
+
+.logo--light {
+  color: var(--blanco);
+}
+
+.logo--light .logo__tooth {
+  fill: none;
+  stroke: var(--blanco);
+}
+
+.logo--light .logo__tag {
+  color: var(--lila-texto);
 }
 
 .header .btn {
@@ -985,6 +1017,10 @@ select:focus {
   font-size: 0.95rem;
 }
 
+.form__teeth[hidden] {
+  display: none;
+}
+
 .form__teeth-edit {
   font-weight: 700;
   color: var(--morado);
@@ -1246,6 +1282,10 @@ select:focus {
 }
 
 /* ---------- Ubicación ---------- */
+.location {
+  background: var(--blanco);
+}
+
 .location__grid {
   display: grid;
   grid-template-columns: 5fr 7fr;
@@ -1533,22 +1573,32 @@ select:focus {
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: 72px 0 32px;
+  padding: 0 0 32px;
   font-size: 0.95rem;
   background: var(--noche);
   color: var(--lila-texto);
 }
 
+/* Línea de acento que separa el footer de la agenda */
+.footer::before {
+  content: "";
+  display: block;
+  max-width: calc(1280px - 2 * clamp(16px, 4vw, 48px));
+  width: calc(100% - 2 * clamp(16px, 4vw, 48px));
+  height: 3px;
+  margin: 0 auto 64px;
+  border-radius: 3px;
+  background: var(--orquidea);
+}
+
 .footer__grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.3fr 1.2fr;
-  gap: 40px;
+  grid-template-columns: 1.3fr 1.2fr 1fr;
+  gap: 48px;
 }
 
 .footer ul {
   list-style: none;
-  display: grid;
-  gap: 8px;
   margin: 0;
   padding: 0;
 }
@@ -1567,21 +1617,102 @@ select:focus {
   outline-color: var(--blanco);
 }
 
-.footer__brand {
-  font-family: var(--display);
-  font-size: 1.6rem;
-  color: var(--blanco);
-  margin-bottom: 10px;
+.footer__about .logo {
+  margin-bottom: 18px;
 }
 
-.footer__about p:not(.footer__brand) {
+.footer__about > p:not(.footer__seal) {
   max-width: 22rem;
+}
+
+.footer__seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 12px 16px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.footer__seal strong {
+  display: block;
+  color: var(--blanco);
+}
+
+.footer svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--orquidea-clara);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer__seal svg {
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  border-radius: 10px;
+  background: rgba(233, 163, 195, 0.12);
+}
+
+.footer__contact {
+  display: grid;
+  gap: 18px;
+}
+
+.footer__contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--blanco);
+}
+
+.footer__legal {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: var(--blanco);
+  font-weight: 700;
 }
 
 .footer__title {
   font-weight: 700;
-  color: var(--orquidea-clara);
-  margin-bottom: 12px;
+  color: var(--blanco);
+  margin-bottom: 14px;
+}
+
+.footer__social ul {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__social li a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s;
+}
+
+.footer__social li a:hover {
+  background: var(--orquidea);
+}
+
+.footer__social svg {
+  fill: var(--blanco);
+  stroke: none;
+}
+
+.footer__social svg.is-line {
+  fill: none;
+  stroke: var(--blanco);
 }
 
 .footer__bottom {
@@ -1729,6 +1860,10 @@ select:focus {
 
   .footer__grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__about {
+    grid-column: 1 / -1;
   }
 
   .reviews__list {
@@ -1888,4 +2023,34 @@ select:focus {
     flex-wrap: wrap;
     width: auto;
   }
+}
+
+/* ---------- Página de privacidad ---------- */
+.legal {
+  min-height: 100vh;
+  background: var(--hueso);
+}
+
+.legal__body {
+  max-width: 760px;
+}
+
+.legal__body h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: 24px 0 16px;
+}
+
+.legal__body h2 {
+  font-size: 1.3rem;
+  margin: 32px 0 8px;
+}
+
+.legal__body p {
+  color: var(--gris);
+}
+
+.legal__back {
+  font-weight: 700;
+  color: var(--morado);
+  text-underline-offset: 3px;
 }
