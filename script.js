@@ -252,6 +252,34 @@ document.querySelectorAll(".compare").forEach((compare) => {
   });
 });
 
+/* ---------- Casos de antes y después: flechas y botones ---------- */
+
+const results = document.querySelector(".results");
+const caseCompares = [...results.querySelectorAll(".compare")];
+const caseCopies = [...results.querySelectorAll(".results__case")];
+const casePills = [...results.querySelectorAll(".results__pills button")];
+const caseCount = results.querySelector(".results__count span");
+let currentCase = 0;
+
+function showCase(index) {
+  currentCase = (index + caseCompares.length) % caseCompares.length;
+  caseCompares.forEach((el, i) => {
+    el.hidden = i !== currentCase;
+    // Cada caso empieza con la línea al medio
+    if (i === currentCase) {
+      el.querySelector(".compare__range").value = 50;
+      el.style.setProperty("--pos", "50%");
+    }
+  });
+  caseCopies.forEach((el, i) => (el.hidden = i !== currentCase));
+  casePills.forEach((el, i) => el.setAttribute("aria-pressed", String(i === currentCase)));
+  caseCount.textContent = currentCase + 1;
+}
+
+results.querySelector(".results__arrow--prev").addEventListener("click", () => showCase(currentCase - 1));
+results.querySelector(".results__arrow--next").addEventListener("click", () => showCase(currentCase + 1));
+casePills.forEach((pill, i) => pill.addEventListener("click", () => showCase(i)));
+
 /* ---------- Botones con motivo: preseleccionan el formulario ---------- */
 
 const motivo = document.getElementById("motivo");

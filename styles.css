@@ -1611,7 +1611,7 @@ select:focus {
 
 .compare {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 7 / 6;
   overflow: hidden;
   border-radius: 24px;
   background: var(--plomo);
@@ -1631,9 +1631,8 @@ select:focus {
   object-fit: cover;
 }
 
-/* El "antes" simulado: la misma foto amarillenta, recortada hasta la línea */
+/* El "antes" se recorta hasta la línea; el "después" queda debajo */
 .compare__before {
-  filter: sepia(0.75) saturate(1.7) hue-rotate(-8deg) brightness(0.88) contrast(0.92);
   clip-path: inset(0 calc(100% - var(--pos)) 0 0);
 }
 
@@ -1702,6 +1701,91 @@ select:focus {
   opacity: 0;
   cursor: ew-resize;
   touch-action: pan-y;
+}
+
+/* Flechas y selector de casos */
+.results__stage {
+  position: relative;
+}
+
+.compare[hidden] {
+  display: none;
+}
+
+.results__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px -10px rgba(33, 30, 37, 0.6);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s;
+}
+
+.results__arrow:hover {
+  background: var(--blanco);
+}
+
+.results__arrow--prev {
+  left: 14px;
+}
+
+.results__arrow--next {
+  right: 14px;
+}
+
+.results__arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--grafito);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.results__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.results__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.results__pills button {
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--gris);
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.results__pills button[aria-pressed="true"] {
+  color: var(--blanco);
+  background: var(--grafito);
+  border-color: var(--grafito);
+}
+
+.results__count {
+  font-size: 0.9rem;
+  color: var(--gris);
 }
 
 /* ---------- Consejos ---------- */

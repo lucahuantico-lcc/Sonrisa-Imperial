@@ -509,42 +509,116 @@
       </div>
     </section>
 
-    <!-- DEMO: simulación. El "antes" es la misma foto oscurecida; reemplazar por fotos reales del mismo paciente con su consentimiento -->
+    <!-- DEMO: imágenes generadas con IA como simulación. Reemplazar por fotos reales del mismo paciente con su consentimiento -->
     <section class="section results" id="resultados">
       <div class="container results__grid">
         <div class="results__copy">
           <h2>Resultados que se ven</h2>
-          <p>Desliza la línea para comparar cómo estaba la sonrisa antes del tratamiento y cómo quedó después.</p>
-          <dl class="results__facts">
-            <div>
-              <dt>Tratamiento</dt>
-              <dd>Blanqueamiento en consultorio</dd>
-            </div>
-            <div>
-              <dt>Sesiones</dt>
-              <dd>2, con una semana entre cada una</dd>
-            </div>
-            <div>
-              <dt>Desde</dt>
-              <dd>S/ 350</dd>
-            </div>
-          </dl>
-          <a href="#agendar" class="btn btn--primary" data-motivo="Blanqueamiento">Quiero un blanqueamiento</a>
+          <p>Desliza la línea para comparar la sonrisa antes y después del tratamiento. Usa las flechas para ver otros casos.</p>
+          <div class="results__case" data-case="0">
+            <dl class="results__facts">
+              <div>
+                <dt>Tratamiento</dt>
+                <dd>Blanqueamiento en consultorio</dd>
+              </div>
+              <div>
+                <dt>Sesiones</dt>
+                <dd>2, con una semana entre cada una</dd>
+              </div>
+              <div>
+                <dt>Desde</dt>
+                <dd>S/ 350</dd>
+              </div>
+            </dl>
+            <a href="#agendar" class="btn btn--primary" data-motivo="Blanqueamiento">Quiero un blanqueamiento</a>
+          </div>
+          <div class="results__case" data-case="1" hidden>
+            <dl class="results__facts">
+              <div>
+                <dt>Tratamiento</dt>
+                <dd>Brackets metálicos</dd>
+              </div>
+              <div>
+                <dt>Duración</dt>
+                <dd>18 meses</dd>
+              </div>
+              <div>
+                <dt>Desde</dt>
+                <dd>S/ 150 al mes</dd>
+              </div>
+            </dl>
+            <a href="#agendar" class="btn btn--primary" data-motivo="Ortodoncia">Quiero alinear mis dientes</a>
+          </div>
+          <div class="results__case" data-case="2" hidden>
+            <dl class="results__facts">
+              <div>
+                <dt>Tratamiento</dt>
+                <dd>Implante dental con corona de porcelana</dd>
+              </div>
+              <div>
+                <dt>Duración</dt>
+                <dd>4 meses</dd>
+              </div>
+              <div>
+                <dt>Desde</dt>
+                <dd>S/ 2 800 por pieza</dd>
+              </div>
+            </dl>
+            <a href="#agendar" class="btn btn--primary" data-motivo="Implantes">Quiero recuperar mi diente</a>
+          </div>
         </div>
 
         <figure class="results__figure">
-          <div class="compare" style="--pos: 50%">
-            <img src="https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?w=1200&h=900&fit=crop&crop=focalpoint&fp-x=0.66&fp-y=0.5&fp-z=1.7" alt="Después: sonrisa con dientes blancos" width="1200" height="900" loading="lazy">
-            <img class="compare__before" src="https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?w=1200&h=900&fit=crop&crop=focalpoint&fp-x=0.66&fp-y=0.5&fp-z=1.7" alt="Antes: la misma sonrisa con los dientes más oscuros" width="1200" height="900" loading="lazy">
-            <span class="compare__tag compare__tag--before" aria-hidden="true">Antes</span>
-            <span class="compare__tag compare__tag--after" aria-hidden="true">Después</span>
-            <span class="compare__line" aria-hidden="true"></span>
-            <span class="compare__handle" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
-            </span>
-            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después">
+          <div class="results__stage">
+            <div class="compare" data-case="0" style="--pos: 50%">
+              <img src="img/blanqueamiento-despues.jpg" alt="Después: la misma sonrisa con los dientes blancos" width="672" height="576">
+              <img class="compare__before" src="img/blanqueamiento-antes.jpg" alt="Antes: sonrisa con los dientes amarillos y manchados" width="672" height="576">
+              <span class="compare__tag compare__tag--before" aria-hidden="true">Antes</span>
+              <span class="compare__tag compare__tag--after" aria-hidden="true">Después</span>
+              <span class="compare__line" aria-hidden="true"></span>
+              <span class="compare__handle" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+              </span>
+              <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después de blanqueamiento">
+            </div>
+            <div class="compare" data-case="1" style="--pos: 50%" hidden>
+              <img src="img/ortodoncia-despues.jpg" alt="Después: la misma sonrisa con los dientes alineados" width="672" height="576" loading="lazy">
+              <img class="compare__before" src="img/ortodoncia-antes.jpg" alt="Antes: sonrisa con los dientes chuecos y montados" width="672" height="576" loading="lazy">
+              <span class="compare__tag compare__tag--before" aria-hidden="true">Antes</span>
+              <span class="compare__tag compare__tag--after" aria-hidden="true">Después</span>
+              <span class="compare__line" aria-hidden="true"></span>
+              <span class="compare__handle" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+              </span>
+              <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después de ortodoncia">
+            </div>
+            <div class="compare" data-case="2" style="--pos: 50%" hidden>
+              <img src="img/implante-despues.jpg" alt="Después: la misma sonrisa completa con un implante" width="672" height="576" loading="lazy">
+              <img class="compare__before" src="img/implante-antes.jpg" alt="Antes: sonrisa a la que le falta un diente de adelante" width="672" height="576" loading="lazy">
+              <span class="compare__tag compare__tag--before" aria-hidden="true">Antes</span>
+              <span class="compare__tag compare__tag--after" aria-hidden="true">Después</span>
+              <span class="compare__line" aria-hidden="true"></span>
+              <span class="compare__handle" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+              </span>
+              <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después de implante">
+            </div>
+            <button type="button" class="results__arrow results__arrow--prev" aria-label="Caso anterior">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button type="button" class="results__arrow results__arrow--next" aria-label="Caso siguiente">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
-          <figcaption>Simulación de ejemplo. Reemplazar por casos reales de la clínica con consentimiento firmado del paciente.</figcaption>
+          <div class="results__nav">
+            <div class="results__pills" role="group" aria-label="Elegir caso">
+              <button type="button" data-case="0" aria-pressed="true">Blanqueamiento</button>
+              <button type="button" data-case="1" aria-pressed="false">Ortodoncia</button>
+              <button type="button" data-case="2" aria-pressed="false">Implante</button>
+            </div>
+            <p class="results__count" aria-live="polite"><span>1</span> de 3</p>
+          </div>
+          <figcaption>Simulación creada con inteligencia artificial. Reemplazar por casos reales de la clínica con consentimiento firmado del paciente.</figcaption>
         </figure>
       </div>
     </section>
