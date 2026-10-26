@@ -585,9 +585,7 @@ a {
 
 /* ---------- Primera visita ---------- */
 .visit {
-  background: var(--blanco);
-  border-top: 1px solid var(--borde);
-  border-bottom: 1px solid var(--borde);
+  background: var(--hueso);
 }
 
 .steps {
@@ -664,7 +662,7 @@ a {
 
 /* ---------- Tratamientos ---------- */
 .treatments {
-  background: var(--hueso);
+  background: var(--blanco);
 }
 
 .treatments__intro {
@@ -697,7 +695,7 @@ a {
   text-align: left;
   font: inherit;
   color: var(--gris);
-  background: var(--blanco);
+  background: var(--hueso);
   border: 1px solid var(--borde);
   border-radius: 14px;
   cursor: pointer;
@@ -711,6 +709,7 @@ a {
 }
 
 .chooser__tabs button[aria-selected="true"] {
+  background: var(--blanco);
   border-color: var(--grafito);
   color: var(--grafito);
   box-shadow: 0 14px 30px -20px rgba(38, 35, 43, 0.5);
