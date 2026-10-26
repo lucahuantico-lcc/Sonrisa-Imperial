@@ -142,6 +142,45 @@ a {
   width: 100%;
 }
 
+.btn--icon {
+  gap: 10px;
+}
+
+.btn--icon svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn--whatsapp {
+  background: var(--blanco);
+  color: var(--grafito);
+  border-color: var(--borde);
+}
+
+.btn--whatsapp svg {
+  fill: #25d366;
+  stroke: none;
+}
+
+.btn--whatsapp:hover {
+  border-color: var(--grafito);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ---------- Header: barra blanca flotante ---------- */
 .header {
   position: sticky;
@@ -273,6 +312,26 @@ a {
   color: var(--gris);
 }
 
+.hero__where {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -16px 0 28px;
+  font-size: 0.95rem;
+  color: var(--grafito);
+}
+
+.hero__where svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--orquidea);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -281,6 +340,8 @@ a {
 }
 
 .rating {
+  width: fit-content;
+  margin-top: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1570,6 +1631,126 @@ select:focus {
   font-size: 0.9rem;
 }
 
+/* ---------- Precios ---------- */
+.treatments__more {
+  margin-top: 28px;
+}
+
+.treatments__more a {
+  font-weight: 700;
+  color: var(--morado);
+  text-underline-offset: 3px;
+}
+
+.prices {
+  background: var(--plomo);
+}
+
+.prices__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 40px;
+}
+
+.prices__head h2 {
+  margin-bottom: 12px;
+}
+
+.prices__head p {
+  max-width: 40rem;
+  color: var(--gris);
+}
+
+.prices__table {
+  width: 100%;
+  margin-top: 40px;
+  border-collapse: collapse;
+  background: var(--blanco);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.prices__table th,
+.prices__table td {
+  padding: 18px 24px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--borde);
+}
+
+.prices__table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.prices__table thead th {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gris);
+  background: var(--hueso);
+}
+
+.prices__table tbody th {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--grafito);
+  white-space: nowrap;
+}
+
+.prices__includes {
+  color: var(--gris);
+  font-size: 0.97rem;
+}
+
+.prices__price {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  color: var(--morado);
+  white-space: nowrap;
+}
+
+.prices__from {
+  font-family: var(--body);
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+
+.prices__note {
+  display: block;
+  font-family: var(--body);
+  font-size: 0.8rem;
+  color: var(--gris);
+  white-space: normal;
+}
+
+.prices__action {
+  text-align: right;
+}
+
+.prices__action a {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--grafito);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.prices__action a:hover {
+  border-color: var(--grafito);
+}
+
+.prices__payment {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: var(--gris);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   padding: 0 0 32px;
@@ -1918,6 +2099,61 @@ select:focus {
 
   .quick {
     padding-bottom: 64px;
+  }
+
+  .prices__table,
+  .prices__table tbody,
+  .prices__table tr,
+  .prices__table th,
+  .prices__table td {
+    display: block;
+  }
+
+  .prices__table thead {
+    display: none;
+  }
+
+  .prices__table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 18px;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .prices__table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .prices__table th,
+  .prices__table td {
+    padding: 0;
+    border: 0;
+  }
+
+  .prices__table tbody th {
+    white-space: normal;
+  }
+
+  .prices__price {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 130px;
+    text-align: right;
+  }
+
+  .prices__includes,
+  .prices__action {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .prices__action {
+    margin-top: 8px;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
   }
 
   .quick__grid {
