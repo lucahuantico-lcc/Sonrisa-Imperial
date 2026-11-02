@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mi sonrisa | Sonrisa Imperial</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#3d2559">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sonrisa Imperial">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+
+  <header class="top">
+    <svg class="top__logo" viewBox="0 0 32 36" width="26" height="30" aria-hidden="true">
+      <path d="M8 11V4.5l4 3.5 4-6 4 6 4-3.5V11z" fill="#b23a74"/>
+      <path transform="translate(0 7) scale(1.333)" d="M7 3.5c-2.5 0-4 2-4 4.5 0 3 1.2 5 2 7.5.6 2 .8 5 2.3 5 1.4 0 1.5-2.5 2.2-4.3.4-1 .9-1.4 2.5-1.4s2.1.4 2.5 1.4c.7 1.8.8 4.3 2.2 4.3 1.5 0 1.7-3 2.3-5 .8-2.5 2-4.5 2-7.5 0-2.5-1.5-4.5-4-4.5-2 0-3 1-5 1s-3-1-5-1z" fill="#fff" stroke="#3d2559" stroke-width="1.2"/>
+    </svg>
+    <div>
+      <p class="top__title">Mi sonrisa</p>
+      <p class="top__date" id="today-label"></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hoy ===== -->
+    <section class="view" id="hoy" aria-labelledby="greeting">
+      <h1 class="greeting" id="greeting"></h1>
+
+      <article class="card card--appointment" id="home-appointment"></article>
+
+      <article class="card">
+        <div class="card__head">
+          <h2>Tu cuidado de hoy</h2>
+          <p class="streak" id="streak"></p>
+        </div>
+        <ul class="checklist" id="checklist"></ul>
+        <p class="checklist__done" id="checklist-done" hidden>¡Completaste tu rutina de hoy! Tus dientes te lo agradecen.</p>
+      </article>
+
+      <article class="card card--tip" id="daily-tip"></article>
+    </section>
+
+    <!-- ===== Mi cita ===== -->
+    <section class="view" id="cita" aria-labelledby="cita-title" hidden>
+      <h1 id="cita-title">Mi cita</h1>
+      <div id="appointment-view"></div>
+
+      <form class="card form" id="appointment-form" hidden>
+        <h2 id="appointment-form-title">Agenda tu próxima cita</h2>
+        <label>
+          Tratamiento
+          <select name="tratamiento" required>
+            <option>Valoración general</option>
+            <option>Limpieza dental</option>
+            <option>Control de ortodoncia</option>
+            <option>Blanqueamiento</option>
+            <option>Implantes</option>
+            <option>Dolor o urgencia</option>
+            <option>Otro</option>
+          </select>
+        </label>
+        <div class="form__row">
+          <label>
+            Fecha
+            <input type="date" name="fecha" required>
+          </label>
+          <label>
+            Hora
+            <input type="time" name="hora" step="900" required>
+          </label>
+        </div>
+        <p class="form__error" id="appointment-error" role="alert" hidden>Elige una fecha y una hora.</p>
+        <button type="submit" class="btn btn--primary" name="accion" value="pedir">Pedir esta cita por WhatsApp</button>
+        <button type="submit" class="btn btn--ghost" name="accion" value="guardar">Ya tengo esta cita, solo guardarla</button>
+      </form>
+    </section>
+
+    <!-- ===== Mi plan ===== -->
+    <section class="view" id="plan" aria-labelledby="plan-title" hidden>
+      <h1 id="plan-title">Mi plan de cuidado</h1>
+      <p class="intro">Elige a qué hora quieres que te recordemos cepillarte. Los recordatorios se guardan en el calendario de tu celular, así te avisa aunque la app esté cerrada.</p>
+
+      <form class="card form" id="plan-form">
+        <h2>Rutina diaria</h2>
+        <div class="routine" id="routine"></div>
+        <button type="button" class="btn btn--primary" id="routine-ics">Agregar todos a mi calendario</button>
+        <p class="hint">En iPhone se agregan todos de una vez. En Android también puedes tocar «Google Calendar» en cada recordatorio.</p>
+      </form>
+
+      <article class="card">
+        <h2>Recordatorios de largo plazo</h2>
+        <ul class="longterm" id="longterm"></ul>
+      </article>
+    </section>
+
+    <!-- ===== Consejos ===== -->
+    <section class="view" id="consejos" aria-labelledby="consejos-title" hidden>
+      <h1 id="consejos-title">Consejos de la doctora</h1>
+      <div class="tips" id="tips"></div>
+      <a class="link-web" href="/">Ver la página de la clínica</a>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Secciones de la app">
+    <a href="#hoy" data-tab="hoy">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>
+      Hoy
+    </a>
+    <a href="#cita" data-tab="cita">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      Mi cita
+    </a>
+    <a href="#plan" data-tab="plan">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Mi plan
+    </a>
+    <a href="#consejos" data-tab="consejos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg>
+      Consejos
+    </a>
+  </nav>
+
+  <script src="/app/app.js"></script>
+</body>
+</html>

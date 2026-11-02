@@ -1,6 +1,6 @@
 // Service worker de Sonrisa Imperial: permite instalar la página como app
 // y abrirla aunque no haya internet. Al cambiar la lista de archivos, sube la versión.
-const VERSION = "sonrisa-v2";
+const VERSION = "sonrisa-v3";
 
 // Archivos propios que se guardan al instalar la app
 const PRECACHE = [
@@ -8,6 +8,9 @@ const PRECACHE = [
   "/index.html",
   "/styles.css",
   "/script.js",
+  "/app/",
+  "/app/app.css",
+  "/app/app.js",
   "/favicon.svg",
   "/manifest.webmanifest",
   "/img/icon-192.png",
@@ -40,7 +43,7 @@ self.addEventListener("fetch", (event) => {
 
   // Primero internet, para mostrar siempre la última versión publicada.
   // Si no hay conexión, se usa la copia guardada.
-  const key = request.mode === "navigate" ? "/" : request;
+  const key = request.mode === "navigate" ? (url.pathname.startsWith("/app") ? "/app/" : "/") : request;
   event.respondWith(
     fetch(request)
       .then((response) => {
