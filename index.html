@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sonrisa Imperial | Clínica dental en Villa María del Triunfo, Lima</title>
   <meta name="description" content="Sonrisa Imperial, clínica dental en Villa María del Triunfo, Lima. Marca el diente que te molesta y agenda tu cita de valoración por WhatsApp.">
-  <meta name="theme-color" content="#2b1150">
+  <meta name="theme-color" content="#3d2559">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- App instalable (PWA) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sonrisa Imperial">
   <link rel="canonical" href="https://sonrisa-imperial-lima.vercel.app/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_PE">
@@ -866,6 +871,15 @@
 
       <div class="footer__social">
         <a href="privacidad.html" class="footer__legal">Política de privacidad</a>
+        <!-- Se muestra solo si el celular o navegador permite instalar la página como app -->
+        <div class="footer__app" id="install-app" hidden>
+          <p class="footer__title">Lleva la clínica en tu celular</p>
+          <button type="button" class="btn btn--glass btn--icon" id="install-button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7M9 11l3 3 3-3M10 18h4"/></svg>
+            Instalar la app
+          </button>
+          <p class="footer__app-hint" id="install-ios" hidden>En iPhone: toca <strong>Compartir</strong> y luego <strong>Agregar a inicio</strong>.</p>
+        </div>
         <p class="footer__title">Síguenos en</p>
         <!-- DEMO: reemplazar # por los enlaces reales de las redes -->
         <ul>

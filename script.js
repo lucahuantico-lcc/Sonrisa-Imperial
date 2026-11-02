@@ -371,3 +371,43 @@ document.getElementById("booking-reset").addEventListener("click", () => {
   success.hidden = true;
   form.hidden = false;
 });
+
+/* ---------- App instalable (PWA) ---------- */
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}
+
+const installBox = document.getElementById("install-app");
+const installButton = document.getElementById("install-button");
+const isInstalled = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+let installPrompt = null;
+
+// Android y computadoras con Chrome o Edge: el navegador avisa cuando se puede instalar
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  installBox.hidden = false;
+  installButton.hidden = false;
+});
+
+installButton.addEventListener("click", async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  installBox.hidden = true;
+});
+
+window.addEventListener("appinstalled", () => {
+  installBox.hidden = true;
+});
+
+// iPhone no tiene botón de instalar: se explica cómo hacerlo desde Safari
+const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+if (isIos && !isInstalled) {
+  installBox.hidden = false;
+  document.getElementById("install-ios").hidden = false;
+}

@@ -2025,12 +2025,12 @@ select:focus {
   background: var(--orquidea);
 }
 
-.footer__social svg {
+.footer__social li svg {
   fill: var(--blanco);
   stroke: none;
 }
 
-.footer__social svg.is-line {
+.footer__social li svg.is-line {
   fill: none;
   stroke: var(--blanco);
 }
@@ -2044,6 +2044,29 @@ select:focus {
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.85rem;
+}
+
+/* Botón para instalar la página como app */
+.footer__app {
+  margin-bottom: 28px;
+}
+
+.footer__app .btn {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+}
+
+.footer__app .btn svg {
+  stroke: currentColor;
+}
+
+.footer__app-hint {
+  max-width: 18rem;
+  font-size: 0.9rem;
+}
+
+.footer__app-hint strong {
+  color: var(--blanco);
 }
 
 /* ---------- WhatsApp flotante ---------- */
