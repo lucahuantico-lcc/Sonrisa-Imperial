@@ -97,6 +97,10 @@ main {
   gap: 16px;
 }
 
+.view[hidden] {
+  display: none;
+}
+
 .view h1 {
   margin-bottom: 0;
 }
@@ -313,6 +317,161 @@ select {
 .form__error {
   color: var(--error);
   font-size: 0.95rem;
+}
+
+/* ---------- Bienvenida ---------- */
+.is-setup .tabs {
+  display: none;
+}
+
+.setup fieldset {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.setup fieldset[hidden] {
+  display: none;
+}
+
+.setup legend {
+  padding: 0;
+}
+
+.setup legend h1 {
+  margin: 0;
+}
+
+.setup__progress {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.setup__progress li {
+  flex: 1;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--borde);
+}
+
+.setup__progress li.is-done {
+  background: var(--morado);
+}
+
+.setup__subtitle {
+  margin-top: 8px;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--blanco);
+  border: 1.5px solid var(--borde);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.options input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  accent-color: var(--morado);
+}
+
+.options small {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+.options label:has(input:checked) {
+  border-color: var(--morado);
+  background: var(--orquidea-suave);
+}
+
+/* Resumen de avisos */
+.schedule {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.schedule li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 2px 12px;
+}
+
+.schedule time {
+  grid-row: span 3;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  color: var(--morado);
+}
+
+.schedule small {
+  color: var(--gris);
+}
+
+.schedule .link {
+  justify-self: start;
+  font-size: 0.9rem;
+}
+
+/* ---------- Pregunta del día ---------- */
+.quiz__options {
+  display: grid;
+  gap: 8px;
+}
+
+.quiz__options button {
+  min-height: 48px;
+  padding: 10px 14px;
+  font: inherit;
+  text-align: left;
+  color: var(--grafito);
+  background: var(--hueso);
+  border: 1.5px solid var(--borde);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.quiz__options button:disabled {
+  cursor: default;
+}
+
+.quiz__options .is-right {
+  background: var(--verde-suave);
+  border-color: var(--verde);
+  font-weight: 700;
+}
+
+.quiz__options .is-wrong {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.quiz__result {
+  font-weight: 700;
+}
+
+.quiz__result.is-right {
+  color: var(--verde);
 }
 
 /* ---------- Plan ---------- */

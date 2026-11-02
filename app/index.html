@@ -30,6 +30,54 @@
   </header>
 
   <main>
+    <!-- ===== Bienvenida: se muestra la primera vez o al cambiar horarios ===== -->
+    <section class="view setup" id="bienvenida" aria-labelledby="setup-title" hidden>
+      <form id="setup-form">
+        <ol class="setup__progress" aria-hidden="true"><li></li><li></li><li></li></ol>
+
+        <fieldset data-step="1">
+          <legend><h1 id="setup-title">Armemos tu plan de cuidado</h1></legend>
+          <p class="intro">¿A qué hora sueles comer? Te recordaremos cepillarte 30 minutos después, que es cuando el esmalte ya se recuperó de los ácidos de la comida.</p>
+          <div class="card form">
+            <label>Desayuno <input type="time" name="desayuno" step="300" value="07:30" required></label>
+            <label>Almuerzo <input type="time" name="almuerzo" step="300" value="13:00" required></label>
+            <label>Cena <input type="time" name="cena" step="300" value="20:00" required></label>
+          </div>
+          <button type="button" class="btn btn--primary" data-next>Siguiente</button>
+        </fieldset>
+
+        <fieldset data-step="2" hidden>
+          <legend><h1>¿Cuántos avisos quieres?</h1></legend>
+          <p class="intro">Nada de mensajes repetidos: solo los que elijas, a la hora justa.</p>
+          <div class="options">
+            <label><input type="radio" name="intensidad" value="normal" checked><span><strong>Después de cada comida</strong><small>3 avisos al día. Recomendado.</small></span></label>
+            <label><input type="radio" name="intensidad" value="tranquilo"><span><strong>Mañana y noche</strong><small>2 avisos al día.</small></span></label>
+            <label><input type="radio" name="intensidad" value="minimo"><span><strong>Solo antes de dormir</strong><small>1 aviso al día. El cepillado más importante.</small></span></label>
+          </div>
+          <h2 class="setup__subtitle">¿Cada cuánto quieres usar hilo dental?</h2>
+          <div class="options">
+            <label><input type="radio" name="hilo" value="diario" checked><span><strong>Todos los días</strong><small>Lo que recomiendan los dentistas.</small></span></label>
+            <label><input type="radio" name="hilo" value="interdiario"><span><strong>Día por medio</strong><small>Para ir agarrando el hábito.</small></span></label>
+            <label><input type="radio" name="hilo" value="semana"><span><strong>Lunes, miércoles y viernes</strong><small>Para empezar de a pocos.</small></span></label>
+          </div>
+          <p class="hint">El hilo dental va dentro del aviso de la noche, no en uno aparte.</p>
+          <div class="btn-row">
+            <button type="button" class="btn btn--ghost" data-back>Atrás</button>
+            <button type="button" class="btn btn--primary" data-next>Siguiente</button>
+          </div>
+        </fieldset>
+
+        <fieldset data-step="3" hidden>
+          <legend><h1>Así te vamos a avisar</h1></legend>
+          <div class="card" id="setup-summary"></div>
+          <div class="btn-row">
+            <button type="button" class="btn btn--ghost" data-back>Atrás</button>
+            <button type="submit" class="btn btn--primary">Listo</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
     <!-- ===== Hoy ===== -->
     <section class="view" id="hoy" aria-labelledby="greeting">
       <h1 class="greeting" id="greeting"></h1>
@@ -46,6 +94,8 @@
       </article>
 
       <article class="card card--tip" id="daily-tip"></article>
+
+      <article class="card quiz" id="quiz"></article>
     </section>
 
     <!-- ===== Mi cita ===== -->
@@ -86,14 +136,8 @@
     <!-- ===== Mi plan ===== -->
     <section class="view" id="plan" aria-labelledby="plan-title" hidden>
       <h1 id="plan-title">Mi plan de cuidado</h1>
-      <p class="intro">Elige a qué hora quieres que te recordemos cepillarte. Los recordatorios se guardan en el calendario de tu celular, así te avisa aunque la app esté cerrada.</p>
-
-      <form class="card form" id="plan-form">
-        <h2>Rutina diaria</h2>
-        <div class="routine" id="routine"></div>
-        <button type="button" class="btn btn--primary" id="routine-ics">Agregar todos a mi calendario</button>
-        <p class="hint">En iPhone se agregan todos de una vez. En Android también puedes tocar «Google Calendar» en cada recordatorio.</p>
-      </form>
+      <article class="card" id="plan-summary"></article>
+      <button type="button" class="btn btn--ghost" id="plan-edit">Cambiar mis horarios o avisos</button>
 
       <article class="card">
         <h2>Recordatorios de largo plazo</h2>
