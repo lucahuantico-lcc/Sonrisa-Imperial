@@ -1,0 +1,26 @@
+# Cada 5 minutos le pide al servidor que envíe las notificaciones que tocan.
+# GitHub puede retrasar unos minutos las tareas programadas en horas de mucho uso.
+# Ojo: si el repositorio pasa 60 días sin cambios, GitHub pausa esta tarea; se reactiva desde la pestaña Actions.
+name: Avisos de la app
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Enviar avisos pendientes
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "Falta el secreto CRON_SECRET en el repositorio: no se envía nada."
+            exit 0
+          fi
+          curl --fail-with-body --silent --show-error --max-time 60 \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            https://sonrisa-imperial-lima.vercel.app/api/push-send

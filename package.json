@@ -1,0 +1,10 @@
+{
+  "name": "sonrisa-imperial",
+  "private": true,
+  "type": "module",
+  "description": "Landing y app de pacientes de Sonrisa Imperial. Las funciones de /api envían las notificaciones.",
+  "dependencies": {
+    "@vercel/blob": "^2.8.2",
+    "web-push": "^3.6.7"
+  }
+}

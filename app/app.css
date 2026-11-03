@@ -433,6 +433,58 @@ select {
   font-size: 0.9rem;
 }
 
+/* Activar notificaciones */
+.push {
+  display: grid;
+  gap: 10px;
+}
+
+.push__note {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+.push__on {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.push__on::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--verde-suave) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f7a54' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+.calendar-alt {
+  border-top: 1px solid var(--borde);
+  padding-top: 12px;
+}
+
+.calendar-alt summary {
+  font-weight: 700;
+  color: var(--morado);
+  cursor: pointer;
+}
+
+.calendar-alt[open] {
+  display: grid;
+  gap: 10px;
+}
+
+.calendar-alt__links {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
 /* ---------- Pregunta del día ---------- */
 .quiz__options {
   display: grid;

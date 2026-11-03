@@ -212,18 +212,29 @@ function renderSchedule(container, p) {
   container.innerHTML = `
     <p class="label">Como máximo ${perDay} ${perDay === 1 ? "aviso" : "avisos"} al día</p>
     <ul class="schedule"></ul>
-    <button type="button" class="btn btn--primary" data-ics>Agregar los avisos a mi calendario</button>
-    <p class="hint">Así tu celular te avisa aunque la app esté cerrada. En Android también puedes usar «Google Calendar» en cada aviso. Si luego cambias tus horarios, borra los avisos anteriores de tu calendario y vuelve a agregarlos.</p>`;
+    <div class="push" data-push></div>
+    <details class="calendar-alt">
+      <summary>Prefiero usar mi calendario</summary>
+      <p class="hint">Se agregan como eventos de tu calendario. Si luego cambias tus horarios, borra los anteriores y vuelve a agregarlos.</p>
+      <button type="button" class="btn btn--ghost" data-ics>Agregar todos a mi calendario</button>
+      <ul class="calendar-alt__links"></ul>
+    </details>`;
 
   const list = container.querySelector(".schedule");
+  const links = container.querySelector(".calendar-alt__links");
   reminderEvents(p).forEach((event) => {
     const li = document.createElement("li");
-    li.innerHTML = `<time></time><strong></strong><small></small><a class="link" target="_blank" rel="noopener">+ Google Calendar</a>`;
+    li.innerHTML = `<time></time><strong></strong><small></small>`;
     li.querySelector("time").textContent = event.hora;
     li.querySelector("strong").textContent = event.title;
     li.querySelector("small").textContent = event.cuando;
-    li.querySelector("a").href = googleCalendarUrl(event);
     list.append(li);
+
+    const link = document.createElement("li");
+    link.innerHTML = `<a class="link" target="_blank" rel="noopener"></a>`;
+    link.querySelector("a").textContent = `Google Calendar: ${event.hora}, ${event.title.toLowerCase()}`;
+    link.querySelector("a").href = googleCalendarUrl(event);
+    links.append(link);
   });
 
   const note = document.createElement("li");
@@ -233,6 +244,132 @@ function renderSchedule(container, p) {
 
   container.querySelector("[data-ics]").addEventListener("click", () => {
     downloadIcs("avisos-sonrisa-imperial.ics", reminderEvents(p).map(icsEvent));
+  });
+
+  renderPush(container.querySelector("[data-push]"), p);
+}
+
+/* ---------- Notificaciones push ---------- */
+
+const VAPID_PUBLIC_KEY = "BOAmTngshpLdAkRzxJZ-ug7vw2qPxFziRW_9xLTlO_h4015Dqol6d1AQ6Sz3ijOitHMmM-xvTXMVIwDdK13tkFo";
+const pushSupported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const isInstalled = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+let pushOn = false;
+
+function urlBase64ToUint8Array(base64) {
+  const padding = "=".repeat((4 - (base64.length % 4)) % 4);
+  const raw = atob((base64 + padding).replace(/-/g, "+").replace(/_/g, "/"));
+  return Uint8Array.from(raw, (c) => c.charCodeAt(0));
+}
+
+async function currentSubscription() {
+  if (!pushSupported) return null;
+  const registration = await navigator.serviceWorker.ready;
+  return registration.pushManager.getSubscription();
+}
+
+const postJson = (url, body, method = "POST") =>
+  fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+
+// Le cuenta al servidor el plan y la cita actuales, para que avise a la hora correcta
+async function syncPush(p = plan) {
+  const subscription = await currentSubscription();
+  if (!subscription || !p) return;
+  const c = upcomingCita();
+  const response = await postJson("/api/push-subscribe", {
+    subscription: subscription.toJSON(),
+    plan: p,
+    cita: c ? { fecha: c.fecha, hora: c.hora, tratamiento: c.tratamiento } : null,
+    zona: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  });
+  if (!response.ok) throw new Error("No se pudo guardar");
+}
+
+async function enablePush(p) {
+  const permission = await Notification.requestPermission();
+  if (permission !== "granted") return permission;
+  const registration = await navigator.serviceWorker.ready;
+  const subscription =
+    (await registration.pushManager.getSubscription()) ||
+    (await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+    }));
+  await syncPush(p);
+  pushOn = true;
+  // Una notificación de prueba al instante, para que el paciente vea que funciona
+  await postJson("/api/push-test", { subscription: subscription.toJSON() }).catch(() => {});
+  return "granted";
+}
+
+async function disablePush() {
+  const subscription = await currentSubscription();
+  if (subscription) {
+    await postJson("/api/push-subscribe", { subscription: subscription.toJSON() }, "DELETE").catch(() => {});
+    await subscription.unsubscribe();
+  }
+  pushOn = false;
+}
+
+function renderPush(box, p) {
+  box.innerHTML = "";
+  const message = (text) => {
+    const el = document.createElement("p");
+    el.className = "push__note";
+    el.textContent = text;
+    box.append(el);
+  };
+
+  if (!pushSupported) {
+    message(
+      isIos && !isInstalled
+        ? "Para recibir notificaciones en iPhone, primero instala la app: en Safari toca Compartir y luego «Agregar a inicio»."
+        : "Este navegador no permite notificaciones. Puedes usar la opción del calendario."
+    );
+    return;
+  }
+
+  if (Notification.permission === "denied") {
+    message("Bloqueaste las notificaciones de esta app. Para activarlas, entra a los ajustes del celular, busca la app y permite las notificaciones.");
+    return;
+  }
+
+  if (pushOn) {
+    box.innerHTML = `
+      <p class="push__on">Notificaciones activadas</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn--ghost" data-test>Enviar una de prueba</button>
+        <button type="button" class="btn btn--ghost" data-off>Desactivar</button>
+      </div>`;
+    box.querySelector("[data-test]").addEventListener("click", async (e) => {
+      e.target.disabled = true;
+      const subscription = await currentSubscription();
+      const response = subscription && (await postJson("/api/push-test", { subscription: subscription.toJSON() }).catch(() => null));
+      e.target.textContent = response?.ok ? "Enviada" : "No se pudo enviar";
+    });
+    box.querySelector("[data-off]").addEventListener("click", async () => {
+      await disablePush();
+      renderPush(box, p);
+    });
+    return;
+  }
+
+  box.innerHTML = `
+    <button type="button" class="btn btn--primary" data-on>Activar notificaciones</button>
+    <p class="push__note">Te llegan como cualquier notificación del celular, aunque la app esté cerrada. Puedes desactivarlas cuando quieras.</p>`;
+  box.querySelector("[data-on]").addEventListener("click", async (e) => {
+    e.target.disabled = true;
+    e.target.textContent = "Activando…";
+    try {
+      await enablePush(p);
+    } catch {
+      e.target.disabled = false;
+      e.target.textContent = "Activar notificaciones";
+      message("No se pudo activar. Revisa tu conexión e inténtalo de nuevo.");
+      return;
+    }
+    renderPush(box, p);
   });
 }
 
@@ -285,6 +422,7 @@ setupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   plan = formPlan();
   save("plan", plan);
+  if (pushOn) syncPush().catch(() => {});
   setupOpen = false;
   location.hash = "#hoy";
   renderAll();
@@ -497,12 +635,14 @@ function renderAppointment() {
   actions.querySelector("[data-confirmar]")?.addEventListener("click", () => {
     cita.estado = "confirmada";
     save("cita", cita);
+    citaChanged();
     renderAll();
   });
   actions.querySelector("[data-borrar]").addEventListener("click", () => {
     if (!confirm("¿Borrar esta cita de la app? No se cancela en la clínica.")) return;
     cita = null;
     save("cita", null);
+    citaChanged();
     renderAll();
   });
 
@@ -527,6 +667,7 @@ document.getElementById("appointment-form").addEventListener("submit", (e) => {
     estado: pedir ? "pendiente" : "confirmada",
   };
   save("cita", cita);
+  citaChanged();
 
   if (pedir) {
     const start = parseLocal(cita.fecha, cita.hora);
@@ -680,6 +821,11 @@ function renderAll() {
   renderTips();
 }
 
+// La cita cambia en varios lugares: después de cada cambio se avisa al servidor
+function citaChanged() {
+  if (pushOn) syncPush().catch(() => {});
+}
+
 renderAll();
 showView();
 
@@ -690,4 +836,14 @@ document.addEventListener("visibilitychange", () => {
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js").catch(() => {});
+}
+
+// Al abrir la app: ver si ya tiene notificaciones activadas y refrescar sus datos en el servidor
+if (pushSupported && Notification.permission === "granted") {
+  currentSubscription().then((subscription) => {
+    if (!subscription) return;
+    pushOn = true;
+    renderPlanSummary();
+    syncPush().catch(() => {});
+  });
 }
