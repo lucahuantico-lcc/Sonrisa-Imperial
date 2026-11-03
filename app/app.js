@@ -2,7 +2,6 @@
 // Todo se guarda solo en el celular del paciente (localStorage); no hay servidor.
 
 const WHATSAPP_NUMBER = "51925659628";
-const CLINICA = "Sonrisa Imperial, Villa María del Triunfo, Lima";
 const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Villa+Mar%C3%ADa+del+Triunfo%2C+Lima";
 
 // Minutos después de comer para cepillarse: el esmalte se recupera de los ácidos
@@ -54,55 +53,6 @@ function addMinutes(hora, minutes) {
   return `${pad(Math.floor(total / 60))}:${pad(total % 60)}`;
 }
 
-/* ---------- Calendario del celular ---------- */
-
-// Hora "flotante" (sin zona): el calendario la toma en la hora local del celular
-const icsDate = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-const icsText = (s) => s.replace(/[\\,;]/g, (c) => `\\${c}`).replace(/\n/g, "\\n");
-
-function icsEvent({ id, title, details, start, minutes, rrule, alarms }) {
-  const end = new Date(start.getTime() + minutes * 60000);
-  const lines = [
-    "BEGIN:VEVENT",
-    `UID:${id}@sonrisa-imperial-lima.vercel.app`,
-    `DTSTAMP:${icsDate(new Date())}`,
-    `DTSTART:${icsDate(start)}`,
-    `DTEND:${icsDate(end)}`,
-    `SUMMARY:${icsText(title)}`,
-    `DESCRIPTION:${icsText(details)}`,
-    `LOCATION:${icsText(CLINICA)}`,
-  ];
-  if (rrule) lines.push(`RRULE:${rrule}`);
-  alarms.forEach((trigger) => {
-    lines.push("BEGIN:VALARM", "ACTION:DISPLAY", `DESCRIPTION:${icsText(title)}`, `TRIGGER:-${trigger}`, "END:VALARM");
-  });
-  lines.push("END:VEVENT");
-  return lines.join("\r\n");
-}
-
-function downloadIcs(filename, events) {
-  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Sonrisa Imperial//App//ES", ...events, "END:VCALENDAR"].join("\r\n");
-  const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
-  const a = Object.assign(document.createElement("a"), { href: url, download: filename });
-  document.body.append(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function googleCalendarUrl({ title, details, start, minutes, rrule }) {
-  const end = new Date(start.getTime() + minutes * 60000);
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: title,
-    details,
-    location: CLINICA,
-    dates: `${icsDate(start)}/${icsDate(end)}`,
-  });
-  if (rrule) params.set("recur", `RRULE:${rrule}`);
-  return `https://calendar.google.com/calendar/render?${params}`;
-}
-
 const whatsappUrl = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 
 /* ---------- Plan de cuidado ---------- */
@@ -147,64 +97,13 @@ const FLOSS_LABEL = {
   semana: "lunes, miércoles y viernes",
 };
 
-// Avisos del calendario: como máximo uno por cepillado; el hilo va en el aviso de la noche
-function reminderEvents(p) {
-  const today = new Date();
-  const at = (date, hora) => {
-    const [h, m] = hora.split(":").map(Number);
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
-  };
-  const base = { minutes: 5, alarms: ["PT0M"] };
-  const events = [];
-
-  brushSlots(p).forEach((slot) => {
-    if (slot.id !== "noche") {
-      events.push({
-        ...base,
-        id: `rutina-${slot.id}`,
-        title: "Hora de cepillarte los dientes",
-        details: `${slot.nombre}. Dos minutos, sin apuro. Tu plan de Sonrisa Imperial.`,
-        start: at(today, slot.hora),
-        rrule: "FREQ=DAILY",
-        hora: slot.hora,
-        cuando: "Todos los días",
-      });
-      return;
-    }
-
-    const conHilo = {
-      ...base,
-      id: "rutina-noche-hilo",
-      title: "Cepíllate y usa hilo dental",
-      details: "El cepillado de la noche es el más importante. Hoy toca también hilo dental.",
-      hora: slot.hora,
-    };
-    const sinHilo = {
-      ...base,
-      id: "rutina-noche",
-      title: "Cepíllate antes de dormir",
-      details: "El cepillado de la noche es el más importante: mientras duermes hay menos saliva para proteger tus dientes.",
-      hora: slot.hora,
-    };
-
-    if (p.hilo === "diario") {
-      events.push({ ...conHilo, start: at(today, slot.hora), rrule: "FREQ=DAILY", cuando: "Todos los días" });
-    } else if (p.hilo === "semana") {
-      const next = (days) => {
-        let d = today;
-        while (!days.includes(d.getDay())) d = addDays(d, 1);
-        return d;
-      };
-      events.push({ ...conHilo, start: at(next(WEEK_FLOSS_DAYS), slot.hora), rrule: "FREQ=WEEKLY;BYDAY=MO,WE,FR", cuando: "Lunes, miércoles y viernes" });
-      events.push({ ...sinHilo, start: at(next([0, 2, 4, 6]), slot.hora), rrule: "FREQ=WEEKLY;BYDAY=TU,TH,SA,SU", cuando: "Los demás días" });
-    } else {
-      const flossToday = isFlossDay(p, today);
-      events.push({ ...conHilo, start: at(flossToday ? today : addDays(today, 1), slot.hora), rrule: "FREQ=DAILY;INTERVAL=2", cuando: "Día por medio" });
-      events.push({ ...sinHilo, start: at(flossToday ? addDays(today, 1) : today, slot.hora), rrule: "FREQ=DAILY;INTERVAL=2", cuando: "Los otros días" });
-    }
+// Avisos que mandará el servidor: como máximo uno por cepillado; el hilo va en el aviso de la noche
+function scheduleItems(p) {
+  return brushSlots(p).map((slot) => {
+    if (slot.id !== "noche") return { hora: slot.hora, title: "Hora de cepillarte", cuando: slot.nombre };
+    if (p.hilo === "diario") return { hora: slot.hora, title: "Cepillado e hilo dental", cuando: "Todas las noches" };
+    return { hora: slot.hora, title: "Cepillado de la noche", cuando: `Con hilo dental ${FLOSS_LABEL[p.hilo]}` };
   });
-
-  return events;
 }
 
 function renderSchedule(container, p) {
@@ -212,38 +111,16 @@ function renderSchedule(container, p) {
   container.innerHTML = `
     <p class="label">Como máximo ${perDay} ${perDay === 1 ? "aviso" : "avisos"} al día</p>
     <ul class="schedule"></ul>
-    <div class="push" data-push></div>
-    <details class="calendar-alt">
-      <summary>Prefiero usar mi calendario</summary>
-      <p class="hint">Se agregan como eventos de tu calendario. Si luego cambias tus horarios, borra los anteriores y vuelve a agregarlos.</p>
-      <button type="button" class="btn btn--ghost" data-ics>Agregar todos a mi calendario</button>
-      <ul class="calendar-alt__links"></ul>
-    </details>`;
+    <div class="push" data-push></div>`;
 
   const list = container.querySelector(".schedule");
-  const links = container.querySelector(".calendar-alt__links");
-  reminderEvents(p).forEach((event) => {
+  scheduleItems(p).forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `<time></time><strong></strong><small></small>`;
-    li.querySelector("time").textContent = event.hora;
-    li.querySelector("strong").textContent = event.title;
-    li.querySelector("small").textContent = event.cuando;
+    li.querySelector("time").textContent = item.hora;
+    li.querySelector("strong").textContent = item.title;
+    li.querySelector("small").textContent = item.cuando;
     list.append(li);
-
-    const link = document.createElement("li");
-    link.innerHTML = `<a class="link" target="_blank" rel="noopener"></a>`;
-    link.querySelector("a").textContent = `Google Calendar: ${event.hora}, ${event.title.toLowerCase()}`;
-    link.querySelector("a").href = googleCalendarUrl(event);
-    links.append(link);
-  });
-
-  const note = document.createElement("li");
-  note.innerHTML = `<time>🪥</time><strong>Hilo dental</strong><small></small>`;
-  note.querySelector("small").textContent = `${FLOSS_LABEL[p.hilo][0].toUpperCase()}${FLOSS_LABEL[p.hilo].slice(1)}, dentro del aviso de la noche`;
-  list.append(note);
-
-  container.querySelector("[data-ics]").addEventListener("click", () => {
-    downloadIcs("avisos-sonrisa-imperial.ics", reminderEvents(p).map(icsEvent));
   });
 
   renderPush(container.querySelector("[data-push]"), p);
@@ -325,7 +202,7 @@ function renderPush(box, p) {
     message(
       isIos && !isInstalled
         ? "Para recibir notificaciones en iPhone, primero instala la app: en Safari toca Compartir y luego «Agregar a inicio»."
-        : "Este navegador no permite notificaciones. Puedes usar la opción del calendario."
+        : "Este navegador no permite notificaciones. Prueba abriendo la app instalada o desde Chrome."
     );
     return;
   }
@@ -498,45 +375,24 @@ function renderPlanSummary() {
 
 /* ---------- Recordatorios de largo plazo ---------- */
 
-function longTermEvents() {
-  const at10 = (days) => {
-    const d = addDays(new Date(), days);
-    d.setHours(10, 0);
-    return d;
-  };
-  return [
-    {
-      id: "cepillo",
-      title: "Cambia tu cepillo de dientes",
-      details: "Cada 3 meses, o antes si las cerdas están abiertas.",
-      start: at10(90),
-      minutes: 15,
-      rrule: "FREQ=MONTHLY;INTERVAL=3",
-      alarms: ["PT0M"],
-    },
-    {
-      id: "limpieza",
-      title: "Toca tu limpieza dental en Sonrisa Imperial",
-      details: "Se recomienda una limpieza cada 6 meses. Agenda tu cita desde la app.",
-      start: at10(180),
-      minutes: 15,
-      rrule: "FREQ=MONTHLY;INTERVAL=6",
-      alarms: ["PT0M"],
-    },
-  ];
+// Mismo cálculo que el servidor: cada 90 días el cepillo y cada 180 la limpieza, contando desde el inicio del plan
+function nextEvery(days) {
+  const start = parseLocal((plan && plan.inicio) || dateKey(new Date()));
+  const passed = Math.max(0, Math.round((parseLocal(dateKey(new Date())) - start) / 86400000));
+  return addDays(start, (Math.floor(passed / days) + 1) * days);
 }
 
 function renderLongTerm() {
   const list = document.getElementById("longterm");
   list.innerHTML = "";
-  longTermEvents().forEach((event) => {
+  [
+    { title: "Cambiar tu cepillo de dientes", details: "Cada 3 meses, o antes si las cerdas están abiertas.", next: nextEvery(90) },
+    { title: "Tu limpieza dental", details: "Cada 6 meses. Te recordaremos agendarla.", next: nextEvery(180) },
+  ].forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `<strong></strong><span class="muted"></span>
-      <span class="links"><a class="link" target="_blank" rel="noopener">+ Google Calendar</a><button type="button" class="link">+ Calendario del iPhone u otro</button></span>`;
-    li.querySelector("strong").textContent = event.title;
-    li.querySelector(".muted").textContent = `${event.details} Primer aviso: ${longDate(event.start)}.`;
-    li.querySelector("a").href = googleCalendarUrl(event);
-    li.querySelector("button").addEventListener("click", () => downloadIcs(`${event.id}-sonrisa-imperial.ics`, [icsEvent(event)]));
+    li.innerHTML = `<strong></strong><span class="muted"></span>`;
+    li.querySelector("strong").textContent = item.title;
+    li.querySelector(".muted").textContent = `${item.details} Próximo aviso: ${longDate(item.next)}.`;
     list.append(li);
   });
 }
@@ -549,17 +405,6 @@ function upcomingCita() {
   if (!cita) return null;
   const start = parseLocal(cita.fecha, cita.hora);
   return daysUntil(start) >= 0 ? { ...cita, start } : null;
-}
-
-function citaEvent(c) {
-  return {
-    id: `cita-${c.fecha}-${c.hora.replace(":", "")}`,
-    title: `Cita de ${c.tratamiento.toLowerCase()} en Sonrisa Imperial`,
-    details: "Llega 10 minutos antes. Si necesitas cambiar la cita, escríbenos por WhatsApp.",
-    start: c.start,
-    minutes: 45,
-    alarms: ["P1D", "PT2H"],
-  };
 }
 
 function countdownText(start) {
@@ -610,14 +455,12 @@ function renderAppointment() {
     <p class="label"></p>
     <p class="countdown">${countdownText(c.start)}</p>
     <h2></h2>
-    <p class="muted"></p>
-    <a class="btn btn--light" target="_blank" rel="noopener" data-google>Agregar a Google Calendar</a>
-    <button type="button" class="btn btn--on-dark" data-ics>Agregar al calendario del iPhone u otro</button>`;
+    <p class="muted"></p>`;
   card.querySelector(".label").textContent = c.estado === "pendiente" ? "Pendiente de confirmar por la clínica" : "Cita confirmada";
   card.querySelector("h2").textContent = c.tratamiento;
-  card.querySelector(".muted").textContent = `${longDate(c.start)}, a las ${c.hora}. Te avisaremos un día antes y 2 horas antes.`;
-  card.querySelector("[data-google]").href = googleCalendarUrl(citaEvent(c));
-  card.querySelector("[data-ics]").addEventListener("click", () => downloadIcs("cita-sonrisa-imperial.ics", [icsEvent(citaEvent(c))]));
+  card.querySelector(".muted").textContent = `${longDate(c.start)}, a las ${c.hora}. ${
+    pushOn ? "Te avisaremos la noche anterior y 2 horas antes." : "Activa las notificaciones en «Mi plan» para que te avisemos."
+  }`;
 
   const actions = document.createElement("article");
   actions.className = "card";

@@ -138,6 +138,28 @@ export function dueNotifications(record, ahora) {
     });
   }
 
+  // Largo plazo, a las 10 a. m.: cada 90 días el cepillo y cada 180 la limpieza (un solo aviso si coinciden)
+  if (record.plan.inicio && enVentana(ahora, 10 * 60)) {
+    const dias = ahora.diaNumero - dayNumber(record.plan.inicio);
+    if (dias > 0 && dias % 180 === 0) {
+      avisos.push({
+        id: `limpieza-${ahora.fecha}`,
+        title: "Te toca tu limpieza dental",
+        body: "Ya pasaron 6 meses. Agenda tu limpieza y aprovecha para cambiar tu cepillo.",
+        tag: "largo-plazo",
+        url: "/app/#cita",
+      });
+    } else if (dias > 0 && dias % 90 === 0) {
+      avisos.push({
+        id: `cepillo-${ahora.fecha}`,
+        title: "Hora de cambiar tu cepillo",
+        body: "Ya pasaron 3 meses. Un cepillo con cerdas abiertas limpia mucho menos.",
+        tag: "largo-plazo",
+        url: "/app/#plan",
+      });
+    }
+  }
+
   // Cita: un aviso la noche anterior (7 p. m.) y otro 2 horas antes
   const cita = record.cita;
   if (cita) {
