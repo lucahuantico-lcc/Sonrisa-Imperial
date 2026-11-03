@@ -25,6 +25,8 @@ export default async function handler(req, res) {
     );
     return res.status(200).json({ ok: true });
   } catch (error) {
-    return res.status(isGone(error) ? 410 : 502).json({ error: "No se pudo enviar la notificación" });
+    // Queda en los registros de Vercel para poder revisar qué respondió el servicio de notificaciones
+    console.error("push-test falló", error.statusCode, String(error.body || error.message).slice(0, 300));
+    return res.status(isGone(error) ? 410 : 502).json({ error: "No se pudo enviar la notificación", status: error.statusCode });
   }
 }

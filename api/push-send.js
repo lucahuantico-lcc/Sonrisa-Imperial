@@ -10,11 +10,29 @@ export default async function handler(req, res) {
 
   const webpush = setupWebPush();
   const resumen = { revisados: 0, enviados: 0, borrados: 0, errores: 0 };
+  // ?diagnostico=1 envía una prueba a todos y devuelve el detalle de cada error
+  const diagnostico = req.query?.diagnostico === "1";
+  if (diagnostico) resumen.detalle = [];
 
   for await (const pathname of allRecordPaths()) {
     resumen.revisados += 1;
     const record = await readRecord(pathname);
     if (!record?.plan) continue;
+
+    if (diagnostico) {
+      const servicio = new URL(record.subscription.endpoint).hostname;
+      try {
+        await webpush.sendNotification(
+          record.subscription,
+          JSON.stringify({ title: "Prueba de Sonrisa Imperial", body: "Si ves esto, las notificaciones funcionan.", tag: "prueba", url: "/app/#plan" }),
+          { TTL: 600 }
+        );
+        resumen.detalle.push({ servicio, ok: true });
+      } catch (error) {
+        resumen.detalle.push({ servicio, status: error.statusCode, respuesta: String(error.body || error.message).slice(0, 300) });
+      }
+      continue;
+    }
 
     const ahora = localNow(record.zona);
     const avisos = dueNotifications(record, ahora);
