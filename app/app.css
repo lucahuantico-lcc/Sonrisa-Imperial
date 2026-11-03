@@ -460,6 +460,31 @@ select {
   background: var(--verde-suave) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232f7a54' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
 }
 
+.calendar-alt {
+  border-top: 1px solid var(--borde);
+  padding-top: 12px;
+}
+
+.calendar-alt summary {
+  font-weight: 700;
+  color: var(--morado);
+  cursor: pointer;
+}
+
+.calendar-alt[open] {
+  display: grid;
+  gap: 10px;
+}
+
+.calendar-alt__links {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
 /* ---------- Pregunta del día ---------- */
 .quiz__options {
   display: grid;
@@ -527,6 +552,11 @@ select {
 
 .routine__item input[type="time"] {
   min-height: 44px;
+}
+
+.calendar-actions {
+  display: grid;
+  gap: 10px;
 }
 
 .hint {
@@ -643,4 +673,18 @@ select {
     border-bottom: 0;
     border-radius: 18px 18px 0 0;
   }
+}
+
+.calendar-alt__help {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: var(--gris);
+  background: var(--hueso);
+  border-radius: 12px;
+}
+
+.calendar-alt__help strong {
+  color: var(--grafito);
 }
