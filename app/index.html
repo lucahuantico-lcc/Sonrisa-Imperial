@@ -27,16 +27,18 @@
       <p class="top__title">Mi sonrisa</p>
       <p class="top__date" id="today-label"></p>
     </div>
+    <a class="top__back" id="back-to-web" href="/" aria-label="Volver a la página de la clínica" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      Volver
+    </a>
   </header>
 
-  <!-- Solo aparece cuando esta página se ve en el navegador y se puede instalar -->
+  <!-- Solo aparece cuando esta página se ve en el navegador, no dentro de la app instalada -->
   <aside class="install" id="install-banner" hidden>
     <p><strong>Instala la app</strong> para tener tu cita y tus recordatorios a un toque.</p>
-    <p class="install__ios" id="install-ios" hidden>En iPhone: toca <strong>Compartir</strong> y luego <strong>Agregar a inicio</strong>.</p>
-    <div class="install__actions">
-      <button type="button" class="btn btn--primary" id="install-button" hidden>Instalar</button>
-      <button type="button" class="link" id="install-dismiss">Ahora no</button>
-    </div>
+    <button type="button" class="btn btn--primary" id="install-button" hidden>Instalar la app</button>
+    <p class="install__help" id="install-help" hidden>Abre el menú de tu navegador (⋮) y elige <strong>Instalar aplicación</strong> o <strong>Agregar a la pantalla principal</strong>. Si ya la instalaste, ábrela desde su ícono.</p>
+    <p class="install__help" id="install-ios" hidden>En iPhone: toca <strong>Compartir</strong> y luego <strong>Agregar a inicio</strong>.</p>
   </aside>
 
   <main>

@@ -433,9 +433,8 @@ setupForm.addEventListener("submit", (e) => {
   save("plan", plan);
   if (pushOn) syncPush().catch(() => {});
   setupOpen = false;
-  location.hash = "#hoy";
   renderAll();
-  showView();
+  goToTab("#hoy");
 });
 
 document.getElementById("plan-edit").addEventListener("click", openSetup);
@@ -824,6 +823,19 @@ function showView() {
 
 window.addEventListener("hashchange", showView);
 
+// Las pestañas y los enlaces internos reemplazan la dirección en lugar de sumar un paso al botón "atrás"
+function goToTab(hash) {
+  history.replaceState(null, "", hash);
+  showView();
+}
+
+document.addEventListener("click", (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  e.preventDefault();
+  goToTab(link.getAttribute("href"));
+});
+
 /* ---------- Inicio ---------- */
 
 function renderAll() {
@@ -857,54 +869,54 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js").catch(() => {});
 }
 
-/* ---------- Instalar la app (solo cuando se ve en el navegador) ---------- */
+/* ---------- Instalar la app y volver a la página (solo en el navegador) ---------- */
 
 const installBanner = document.getElementById("install-banner");
 const installButton = document.getElementById("install-button");
+const installHelp = document.getElementById("install-help");
 let installPrompt = null;
 
-const hideInstallBanner = () => {
-  installBanner.hidden = true;
-};
+if (!isInstalled) {
+  installBanner.hidden = false;
 
-// Android y computadoras con Chrome o Edge: el navegador avisa cuando se puede instalar
+  // iPhone no tiene botón de instalar: se explica cómo hacerlo desde Safari
+  if (isIos) {
+    document.getElementById("install-ios").hidden = false;
+  } else {
+    installButton.hidden = false;
+  }
+
+  const backToWeb = document.getElementById("back-to-web");
+  backToWeb.hidden = false;
+  backToWeb.addEventListener("click", (e) => {
+    // Si vino desde la página, se regresa al mismo punto donde estaba
+    const from = document.referrer ? new URL(document.referrer) : null;
+    if (from && from.origin === location.origin && from.pathname === "/") {
+      e.preventDefault();
+      history.back();
+    }
+  });
+}
+
+// El navegador avisa cuando puede mostrar su ventana de instalación (Chrome y Edge)
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   installPrompt = e;
-  if (load("instalar-oculto", false)) return;
-  installBanner.hidden = false;
-  installButton.hidden = false;
+  installHelp.hidden = true;
 });
 
 installButton.addEventListener("click", async () => {
-  if (!installPrompt) return;
-  installPrompt.prompt();
-  await installPrompt.userChoice;
+  // La ventana del navegador solo se puede abrir una vez por aviso: si ya se canceló, se explica la otra forma
+  if (!installPrompt) {
+    installHelp.hidden = false;
+    return;
+  }
+  const prompt = installPrompt;
   installPrompt = null;
-  hideInstallBanner();
+  prompt.prompt();
+  await prompt.userChoice;
 });
 
-document.getElementById("install-dismiss").addEventListener("click", () => {
-  save("instalar-oculto", true);
-  hideInstallBanner();
+window.addEventListener("appinstalled", () => {
+  installBanner.hidden = true;
 });
-
-window.addEventListener("appinstalled", hideInstallBanner);
-
-// iPhone no tiene botón de instalar: se explica cómo hacerlo desde Safari
-if (isIos && !isInstalled && !load("instalar-oculto", false)) {
-  installBanner.hidden = false;
-  document.getElementById("install-ios").hidden = false;
-}
-
-// Al abrir la app: ver si ya tiene notificaciones activadas y refrescar sus datos en el servidor
-if (pushSupported && Notification.permission === "granted") {
-  currentSubscription().then((subscription) => {
-    if (!subscription) return;
-    pushOn = true;
-    renderPlanSummary();
-    renderLongTerm();
-    renderAppointment();
-    syncPush().catch(() => {});
-  });
-}
