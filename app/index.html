@@ -29,6 +29,16 @@
     </div>
   </header>
 
+  <!-- Solo aparece cuando esta página se ve en el navegador y se puede instalar -->
+  <aside class="install" id="install-banner" hidden>
+    <p><strong>Instala la app</strong> para tener tu cita y tus recordatorios a un toque.</p>
+    <p class="install__ios" id="install-ios" hidden>En iPhone: toca <strong>Compartir</strong> y luego <strong>Agregar a inicio</strong>.</p>
+    <div class="install__actions">
+      <button type="button" class="btn btn--primary" id="install-button" hidden>Instalar</button>
+      <button type="button" class="link" id="install-dismiss">Ahora no</button>
+    </div>
+  </aside>
+
   <main>
     <!-- ===== Bienvenida: se muestra la primera vez o al cambiar horarios ===== -->
     <section class="view setup" id="bienvenida" aria-labelledby="setup-title" hidden>
@@ -149,7 +159,8 @@
     <section class="view" id="consejos" aria-labelledby="consejos-title" hidden>
       <h1 id="consejos-title">Consejos de la doctora</h1>
       <div class="tips" id="tips"></div>
-      <a class="link-web" href="/">Ver la página de la clínica</a>
+      <a class="link-web" href="/" target="_blank" rel="noopener">Ver la página de la clínica</a>
+      <p class="hint link-web__hint">Se abre en tu navegador. La app queda como estaba.</p>
     </section>
   </main>
 

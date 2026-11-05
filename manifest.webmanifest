@@ -5,7 +5,7 @@
   "description": "Agenda tu cita en Sonrisa Imperial, clínica dental en Villa María del Triunfo, Lima.",
   "lang": "es-PE",
   "start_url": "/app/?source=app",
-  "scope": "/",
+  "scope": "/app/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f6f2eb",

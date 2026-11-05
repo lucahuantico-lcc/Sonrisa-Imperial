@@ -1,6 +1,6 @@
 // Service worker de Sonrisa Imperial: permite instalar la página como app
 // y abrirla aunque no haya internet. Al cambiar la lista de archivos, sube la versión.
-const VERSION = "sonrisa-v7";
+const VERSION = "sonrisa-v8";
 
 // Archivos propios que se guardan al instalar la app
 const PRECACHE = [

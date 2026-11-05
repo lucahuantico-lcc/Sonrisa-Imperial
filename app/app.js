@@ -857,6 +857,46 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js").catch(() => {});
 }
 
+/* ---------- Instalar la app (solo cuando se ve en el navegador) ---------- */
+
+const installBanner = document.getElementById("install-banner");
+const installButton = document.getElementById("install-button");
+let installPrompt = null;
+
+const hideInstallBanner = () => {
+  installBanner.hidden = true;
+};
+
+// Android y computadoras con Chrome o Edge: el navegador avisa cuando se puede instalar
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  if (load("instalar-oculto", false)) return;
+  installBanner.hidden = false;
+  installButton.hidden = false;
+});
+
+installButton.addEventListener("click", async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  hideInstallBanner();
+});
+
+document.getElementById("install-dismiss").addEventListener("click", () => {
+  save("instalar-oculto", true);
+  hideInstallBanner();
+});
+
+window.addEventListener("appinstalled", hideInstallBanner);
+
+// iPhone no tiene botón de instalar: se explica cómo hacerlo desde Safari
+if (isIos && !isInstalled && !load("instalar-oculto", false)) {
+  installBanner.hidden = false;
+  document.getElementById("install-ios").hidden = false;
+}
+
 // Al abrir la app: ver si ya tiene notificaciones activadas y refrescar sus datos en el servidor
 if (pushSupported && Notification.permission === "granted") {
   currentSubscription().then((subscription) => {
