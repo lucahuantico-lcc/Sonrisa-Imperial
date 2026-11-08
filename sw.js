@@ -1,6 +1,6 @@
 // Service worker de Sonrisa Imperial: permite instalar la página como app
 // y abrirla aunque no haya internet. Al cambiar la lista de archivos, sube la versión.
-const VERSION = "sonrisa-v9";
+const VERSION = "sonrisa-v10";
 
 // Archivos propios que se guardan al instalar la app
 const PRECACHE = [
@@ -77,7 +77,8 @@ self.addEventListener("push", (event) => {
     self.registration.showNotification(data.title || "Sonrisa Imperial", {
       body: data.body || "",
       icon: "/img/icon-192.png",
-      badge: "/img/icon-192.png",
+      // Ícono pequeño de la barra de Android: solo silueta blanca sobre fondo transparente
+      badge: "/img/badge-96.png",
       // Mismo tag = reemplaza al aviso anterior del mismo tipo en lugar de acumularse
       tag: data.tag || "sonrisa-imperial",
       data: { url: data.url || "/app/" },
