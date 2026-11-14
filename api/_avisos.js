@@ -83,27 +83,35 @@ function isFlossDay(plan, ahora) {
   return (ahora.diaNumero - inicio) % 2 === 0;
 }
 
-// Mensajes que se van alternando por día, para que no sea siempre el mismo texto
+// Mensajes que se van alternando por día, para que no sea siempre el mismo texto.
+// Tono de recordatorio personal: sin urgencia ni ofertas, y dejando claro que es el plan que la persona eligió
+const TITULOS = {
+  desayuno: "Tu plan: cepillado de la mañana",
+  almuerzo: "Tu plan: cepillado del mediodía",
+  noche: "Tu plan: cepillado de la noche",
+  nocheHilo: "Tu plan: cepillado e hilo dental",
+};
+
 const MENSAJES = {
   desayuno: [
-    "Buen día. Dos minutos de cepillado y sales con la sonrisa lista.",
-    "Ya desayunaste: es buen momento para cepillarte.",
-    "Tu cepillado de la mañana. Sin apuro, dos minutos.",
+    "Después del desayuno, dos minutos de cepillado.",
+    "Recordatorio de tu cepillado de la mañana.",
+    "Ya pasó el desayuno: es buen momento para cepillarte.",
   ],
   almuerzo: [
-    "¿Ya almorzaste? Es buen momento para cepillarte.",
-    "Un cepillado después del almuerzo y sigues tu día tranquilo.",
-    "Hora del cepillado de mediodía.",
+    "Después del almuerzo, dos minutos de cepillado.",
+    "Recordatorio de tu cepillado del mediodía.",
+    "Ya pasó el almuerzo: es buen momento para cepillarte.",
   ],
   noche: [
-    "Antes de dormir, cepíllate. Es el cepillado más importante del día.",
-    "Último cepillado del día. Mientras duermes, tus dientes quedan protegidos.",
-    "Cepíllate antes de dormir y mañana despiertas con la boca fresca.",
+    "Antes de dormir, tu último cepillado del día.",
+    "Recordatorio de tu cepillado de la noche.",
+    "El cepillado de la noche es el más importante del día.",
   ],
   nocheHilo: [
-    "Antes de dormir: cepillado e hilo dental. Hoy toca.",
-    "Hoy toca hilo dental. Úsalo junto con tu cepillado de la noche.",
-    "Cepillado y hilo dental antes de dormir. Tus encías te lo agradecen.",
+    "Hoy toca hilo dental, junto con tu cepillado de la noche.",
+    "Recordatorio de tu cepillado de la noche y del hilo dental.",
+    "Antes de dormir: cepillado e hilo dental, como elegiste en tu plan.",
   ],
 };
 
@@ -131,7 +139,7 @@ export function dueNotifications(record, ahora) {
     const conHilo = slot.id === "noche" && isFlossDay(record.plan, ahora);
     avisos.push({
       id: slot.id,
-      title: conHilo ? "Cepillado e hilo dental" : "Hora de cepillarte",
+      title: TITULOS[conHilo ? "nocheHilo" : slot.id],
       body: pick(MENSAJES[conHilo ? "nocheHilo" : slot.id], ahora),
       tag: `rutina-${slot.id}`,
       url: "/app/#hoy",
@@ -144,16 +152,16 @@ export function dueNotifications(record, ahora) {
     if (dias > 0 && dias % 180 === 0) {
       avisos.push({
         id: `limpieza-${ahora.fecha}`,
-        title: "Te toca tu limpieza dental",
-        body: "Ya pasaron 6 meses. Agenda tu limpieza y aprovecha para cambiar tu cepillo.",
+        title: "Tu plan: limpieza dental",
+        body: "Ya pasaron 6 meses desde tu último control. Cuando puedas, pide tu limpieza desde la app.",
         tag: "largo-plazo",
         url: "/app/#cita",
       });
     } else if (dias > 0 && dias % 90 === 0) {
       avisos.push({
         id: `cepillo-${ahora.fecha}`,
-        title: "Hora de cambiar tu cepillo",
-        body: "Ya pasaron 3 meses. Un cepillo con cerdas abiertas limpia mucho menos.",
+        title: "Tu plan: cambio de cepillo",
+        body: "Ya pasaron 3 meses. Es momento de cambiar tu cepillo de dientes.",
         tag: "largo-plazo",
         url: "/app/#plan",
       });
@@ -165,12 +173,11 @@ export function dueNotifications(record, ahora) {
   if (cita) {
     const diaCita = dayNumber(cita.fecha);
     const minutosCita = toMinutes(cita.hora);
-    const tratamiento = cita.tratamiento.toLowerCase();
     if (diaCita - ahora.diaNumero === 1 && enVentana(ahora, 19 * 60)) {
       avisos.push({
         id: `cita-manana-${cita.fecha}`,
-        title: "Mañana tienes tu cita",
-        body: `Cita de ${tratamiento} a las ${cita.hora} en Sonrisa Imperial. Si no puedes ir, avísanos.`,
+        title: "Tu cita es mañana",
+        body: `${cita.tratamiento} a las ${cita.hora} en Sonrisa Imperial.`,
         tag: "cita",
         url: "/app/#cita",
       });
@@ -178,8 +185,8 @@ export function dueNotifications(record, ahora) {
     if (diaCita === ahora.diaNumero && enVentana(ahora, Math.max(minutosCita - 120, 0))) {
       avisos.push({
         id: `cita-hoy-${cita.fecha}`,
-        title: "Tu cita es en 2 horas",
-        body: `Te esperamos a las ${cita.hora} para tu ${tratamiento}. Llega 10 minutos antes.`,
+        title: "Tu cita es hoy",
+        body: `${cita.tratamiento} a las ${cita.hora} en Sonrisa Imperial.`,
         tag: "cita",
         url: "/app/#cita",
       });

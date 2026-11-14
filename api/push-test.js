@@ -16,8 +16,8 @@ export default async function handler(req, res) {
     await setupWebPush().sendNotification(
       subscription,
       JSON.stringify({
-        title: "¡Notificaciones activadas!",
-        body: "Así te vamos a recordar tu cepillado y tus citas. Pocas veces al día, a la hora justa.",
+        title: "Notificaciones de tu plan activadas",
+        body: "Así se verán los recordatorios de cepillado y de tus citas.",
         tag: "prueba",
         url: "/app/#plan",
       }),
